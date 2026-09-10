@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miva Open University - CBT Exam Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f4f6f9; }
+        .miva-nav { background-color: #0b2240; }
+        .miva-red { background-color: #e53e3e; }
+        .badge-100l { clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-gray-800">
+
+    <!-- TOP HEADER -->
+    <header class="miva-nav text-white px-6 py-3 flex items-center justify-between shadow-md sticky top-0 z-50">
+        <div class="flex items-center space-x-6">
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="showDashboard()">
+                <!-- Miva Logo SVG -->
+                <svg class="h-8 w-auto" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 4L22 22H2L12 4Z" fill="#E53E3E"/>
+                    <path d="M7 14L17 32H-3L7 14Z" fill="white" fill-opacity="0.8"/>
+                    <text x="32" y="26" fill="white" font-weight="700" font-size="20" letter-spacing="1">MIVA</text>
+                </svg>
+            </div>
+            <span class="text-gray-300 text-sm hidden md:inline border-l border-gray-600 pl-6">Open University</span>
+        </div>
+        <div class="flex items-center space-x-6">
+            <span id="nav-title" class="text-sm font-medium hidden lg:inline">My courses</span>
+            <div class="flex items-center space-x-4 text-gray-300">
+                <button class="hover:text-white transition"><i class="fa-regular fa-bell text-lg"></i></button>
+                <button class="hover:text-white transition"><i class="fa-regular fa-comment-dots text-lg"></i></button>
+            </div>
+            <div class="flex items-center space-x-2 border-l border-gray-600 pl-4">
+                <div class="w-9 h-9 rounded-full bg-white text-gray-900 font-bold flex items-center justify-center text-sm shadow">
+                    MA
+                </div>
+                <span class="text-sm font-medium hidden sm:inline">Morenike A.</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8" id="main-container">
+        <!-- Dynamic views get injected here -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-200 py-4 text-center text-xs text-gray-500">
+        &copy; 2026 Miva Open University &bull; CBT Examination Portal &bull; All Rights Reserved
+    -</footer>
+
+    <script>
+        // EMBEDDED EXAM QUESTION BANK (420 Questions across 7 Courses)
+        const examData = {
+            "CSC 106": {
+                code: "CSC 106",
+                title: "CSC 106 - Introduction to Web Technologies",
+                school: "School of Computing",
+                questions: [
+                    { q: "What military and academic research network served as the precursor to the modern Internet?", options: ["USENET", "ARPANET", "BITNET", "ALOHANET"], answer: "B" },
+                    { q: "Who invented the World Wide Web in 1989?", options: ["Alan Turing", "Vint Cerf", "Brendan Eich", "Tim Berners-Lee"], answer: "D" },
+                    { q: "What is the fundamental distinction between the Internet and the World Wide Web?", options: ["The Internet is the global network infrastructure while the Web is an information service built upon it", "The Internet is for email while the Web is for videos", "The Web is the physical hardware while the Internet is the software protocol", "They are identical terms with no technical distinction"], answer: "A" },
+                    { q: "Why is standard HTTP considered insecure for transmitting sensitive data?", options: ["It requires an expensive commercial license", "It does not support client-side form submissions", "It transmits data in unencrypted plain text susceptible to interception", "It only operates over dial-up connections"], answer: "C" },
+                    { q: "What security protocol is added to HTTP to create HTTPS?", options: ["FTP and Telnet", "SSL/TLS encryption", "DNS caching", "BGP routing"], answer: "B" },
+                    { q: "Which file transfer protocol provides built-in encryption and secure authentication via SSH?", options: ["TFTP", "SFTP", "FTP", "HTTP"], answer: "B" },
+                    { q: "What does the acronym HTML stand for?", options: ["Hyperlink Text Multiprocessing Language", "High-level Text Management Logic", "Hyper Transfer Media Language", "Hypertext Markup Language"], answer: "D" },
+                    { q: "Which HTML tag is used to define an active hyperlink to another web page?", options: ["<a>", "<link>", "<href>", "<url>"], answer: "A" },
+                    { q: "What is the primary function of Cascading Style Sheets (CSS) in web development?", options: ["Handling database queries and backend routing", "Defining the visual presentation, layout, and styling of web documents", "Executing asynchronous network requests", "Managing server-side operating system processes"], answer: "B" },
+                    { q: "Which programming language enables interactive behavior, DOM manipulation, and dynamic client-side logic?", options: ["HTML", "CSS", "JavaScript", "SQL"], answer: "C" },
+                    { q: "What core architecture characterizes modern web applications where the frontend communicates with backend APIs?", options: ["Client-Server Architecture", "Mainframe Batch Processing", "Peer-to-Peer Ring Topology", "Standalone Desktop Monolith"], answer: "A" },
+                    { q: "What does URL stand for in web architecture?", options: ["Universal Resource Locator", "Unified Retrieval Link", "Uniform Resource Locator", "Unrestricted Reference Line"], answer: "C" },
+                    { q: "Which component of a URL specifies the communication protocol used to access the resource?", options: ["Domain name", "Scheme/Protocol", "Path", "Query string"], answer: "B" },
+                    { q: "What is the role of a Web Server such as Nginx or Apache?", options: ["To design graphic icons", "To store and serve web pages and application assets to client browsers", "To compile native desktop applications", "To replace database indexing"], answer: "B" },
+                    { q: "What does DNS stand for in internet infrastructure?", options: ["Domain Name System", "Data Network Storage", "Digital Node Switch", "Dynamic Name Service"], answer: "A" },
+                    { q: "What is the primary function of a DNS server?", options: ["Encrypting user passwords", "Translating human-readable domain names into machine IP addresses", "Compressing image files", "Routing email attachments"], answer: "B" },
+                    { q: "Which IP version introduced 128-bit addresses to solve IPv4 address exhaustion?", options: ["IPv3", "IPv5", "IPv6", "IPvX"], answer: "C" },
+                    { q: "What does DOM stand for in frontend web development?", options: ["Digital Object Model", "Document Object Model", "Data Organization Manager", "Display Orientation Module"], answer: "B" },
+                    { q: "Which tool is commonly used by developers to inspect DOM elements, monitor network requests, and debug JavaScript?", options: ["Browser Developer Tools", "Text Editor Plugins", "Database Management Consoles", "FTP Clients"], answer: "A" },
+                    { q: "What is responsive web design?", options: ["Designing websites that load instantly on dial-up connections", "Designing web layouts that adapt fluidly across various screen sizes and devices", "Using audio feedback for user clicks", "Building websites exclusively for mobile phones"], answer: "B" },
+                    { q: "Which CSS layout module is designed for one-dimensional layouts either in a row or a column?", options: ["CSS Grid", "CSS Flexbox", "CSS Float", "CSS Table"], answer: "B" },
+                    { q: "Which CSS layout module is best suited for two-dimensional layouts (rows and columns simultaneously)?", options: ["CSS Flexbox", "CSS Grid", "CSS Position", "CSS Inline"], answer: "B" },
+                    { q: "What is the purpose of media queries in CSS?", options: ["To play background music", "To apply specific CSS styles based on device characteristics like viewport width", "To query databases for user media", "To optimize video streaming"], answer: "B" },
+                    { q: "What does API stand for in software and web engineering?", options: ["Advanced Program Integration", "Application Programming Interface", "Automated Protocol Interaction", "Async Processing Infrastructure"], answer: "B" },
+                    { q: "Which data interchange format has largely replaced XML in modern RESTful web APIs due to its lightweight syntax?", options: ["YAML", "CSV", "JSON", "Markdown"], answer: "C" },
+                    { q: "What HTTP method is typically used to retrieve or read a resource from a server?", options: ["POST", "PUT", "DELETE", "GET"], answer: "D" },
+                    { q: "What HTTP method is standard for creating a new resource on the server?", options: ["GET", "POST", "PATCH", "HEAD"], answer: "B" },
+                    { q: "What HTTP status code indicates successful completion of a request (OK)?", options: ["200", "404", "500", "301"], answer: "A" },
+                    { q: "What HTTP status code represents a 'Not Found' error when a resource does not exist?", options: ["200", "403", "404", "502"], answer: "C" },
+                    { q: "What HTTP status code indicates a Server Error?", options: ["100", "201", "304", "500"], answer: "D" },
+                    { q: "What is the purpose of client-side form validation?", options: ["To store passwords securely on the server", "To provide immediate feedback to users and reduce unnecessary server requests", "To encrypt database tables", "To replace backend security entirely"], answer: "B" },
+                    { q: "Which JavaScript method is used to select a DOM element using a CSS selector string?", options: ["getElementById()", "querySelector()", "getElementsByTag()", "selectElement()"], answer: "B" },
+                    { q: "How do you declare a constant variable in modern JavaScript (ES6+)?", options: ["var", "let", "const", "static"], answer: "C" },
+                    { q: "What is the purpose of Git in software and web development projects?", options: ["To host live database servers", "Version control and collaborative source code management", "To test website loading speeds", "To design user interface mockups"], answer: "B" },
+                    { q: "What platform provides cloud hosting and continuous deployment for frontend static and Jamstack applications?", options: ["Vercel", "MySQL Server", "Apache Tomcat", "PHPMyAdmin"], answer: "A" },
+                    { q: "What is semantic HTML?", options: ["Using tags that convey meaning about the content enclosed within them (e.g., <article>, <nav>) CODE", "Using <div> tags for every single element", "Writing code in multiple languages", "Encrypting HTML files"], answer: "A" },
+                    { q: "Which HTML5 tag is best suited for wrapping the primary navigational links of a website?", options: ["<sidebar>", "<nav>", "<menu>", "<header>"], answer: "B" },
+                    { q: "What is web accessibility (a11y)?", options: ["Ensuring websites can be used by people with diverse abilities and disabilities", "Making websites load without internet connection", "Providing free Wi-Fi access", "Ensuring websites work on old monitors"], answer: "A" },
+                    { q: "What attribute is added to an <img> tag to provide alternative text for screen readers and accessibility?", options: ["title", "description", "alt", "aria"], answer: "C" },
+                    { q: "What is a Single Page Application (SPA)?", options: ["A website with only one paragraph of text", "An application that loads a single HTML page and dynamically updates content without full page reloads", "A website that cannot be scrolled", "A page with no images"], answer: "B" },
+                    { q: "Which JavaScript library or framework was developed by Meta (Facebook) for building component-based user interfaces?", options: ["Angular", "Vue.js", "React", "Svelte"], answer: "C" },
+                    { q: "What is JSX in React?", options: ["A database query language", "A syntax extension for JavaScript that allows writing HTML-like code within JavaScript", "A CSS preprocessor", "A server configuration file"], answer: "B" },
+                    { q: "What are 'props' in React components?", options: ["Mutable internal states", "Properties passed from parent to child components for data configuration", "CSS stylesheet links", "Database connection strings"], answer: "B" },
+                    { q: "What is 'state' in a React component?", options: ["The geographical location of the user", "An object representing data that changes over time and drives component re-rendering", "The HTTP status code", "The browser version"], answer: "B" },
+                    { q: "What is the primary purpose of client-side routing in SPAs?", options: ["To navigate between views instantly without reloading the page from the server", "To route network cables correctly", "To redirect spam emails", "To manage server memory"], answer: "A" },
+                    { q: "What is CORS (Cross-Origin Resource Sharing)?", options: ["A security mechanism that restricts web pages from making requests to a different domain than the one served the page", "A CSS grid framework", "A file compression format", "A database backup protocol"], answer: "A" },
+                    { q: "What is the purpose of an SSL/TLS certificate on a web server?", options: ["To prove ownership of the domain and enable encrypted HTTPS connections", "To increase CPU processing speed", "To compress image files", "To disable cookies"], answer: "A" },
+                    { q: "What is web hosting?", options: ["Renting server space and resources to make a website accessible on the internet", "Designing website graphics", "Buying domain names", "Writing code in a text editor"], answer: "A" },
+                    { q: "What is a Content Delivery Network (CDN)?", options: ["A network of distributed proxy servers that cache content closer to users to reduce latency", "A database server cluster", "A cable television provider", "An email delivery service"], answer: "A" },
+                    { q: "What is frontend web performance optimization?", options: ["Techniques to make web pages load faster and render more smoothly for users", "Writing longer code", "Adding more banner ads", "Disabling JavaScript entirely"], answer: "A" },
+                    { q: "What does minification mean in web asset deployment?", options: ["Compressing code by removing whitespace, comments, and shorting variable names without changing functionality", "Deleting 50% of the website features", "Making font sizes smaller", "Reducing image resolutions"], answer: "A" },
+                    { q: "What is lazy loading in web development?",options: ["Delaying the loading of non-critical resources (like images below the fold) until they are needed", "Not writing code until deadlines", "Using slow internet connections", "Loading all scripts at once"], answer: "A" },
+                    { q: "What is Webpack or Vite in modern web development workflows?", options: ["Module bundlers and build tools that compile and bundle frontend assets", "Database management systems", "Text editors", "Web browsers"], answer: "A" },
+                    { q: "What is Tailwind CSS?", options: ["A utility-first CSS framework for rapidly building custom user interfaces", "A server-side programming language", "A database query tool", "An operating system"], answer: "A" },
+                    { q: "What is the Document Object Model (DOM) tree?", options: ["A hierarchical representation of the web document structured as nodes and objects", "A family tree of web developers", "A database schema diagram", "A folder directory on a server"], answer: "A" },
+                    { q: "What is an event listener in JavaScript?", options: ["A function that waits for a specific event (like a click or keypress) to occur on an element and executes callback code", "An audio recording device", "A network traffic analyzer", "A security firewall"], answer: "A" },
+                    { q: "What is asynchronous JavaScript (Async/Await, Promises)?", options: ["Code execution that allows tasks like network requests to run in the background without blocking the main thread", "Running code at random times", "Writing code without syntax rules", "Translating code into different languages"], answer: "A" },
+                    { q: "What is LocalStorage in web browsers?", options: ["A web storage API that allows saving key-value pairs in a browser with no expiration time", "The computer hard drive", "RAM memory", "Cloud server storage"], answer: "A" },
+                    { q: "What hashing algorithm family is strongly recommended for securely storing user passwords in modern web applications?", options: ["MD5", "Bcrypt or Argon2", "SHA-1", "Base64"], answer: "B" },
+                    { q: "What is the primary role of an API (Application Programming Interface) in web development?", options: ["To format CSS typography", "To manage physical server power distribution", "To design website color palettes", "To provide a standardized protocol for software applications to communicate and exchange data"], answer: "D" }
+                ]
+            },
+            "PHY 108": {
+                code: "PHY 108",
+                title: "PHY 108 - General Physics Practical II",
+                school: "School of Computing",
+                questions: [
+                    { q: "What is the primary purpose of conducting laboratory experiments in physics practicals?", options: ["To memorize textbook formulas", "To verify theoretical principles and learn measurement techniques", "To design computer games", "To calculate financial budgets"], answer: "B" },
+                    { q: "Which instrument is used to measure small lengths and diameters with high precision (up to 0.01 mm)?", options: ["Metre rule", "Micrometer screw gauge", "Spring balance", "Thermometer"], answer: "B" },
+                    { q: "What is the least count of a standard vernier caliper with 10 divisions on the vernier scale matching 9 mm on the main scale?", options: ["0.1 cm", "0.01 cm", "0.001 cm", "1.0 cm"], answer: "B" },
+                    { q: "What is zero error in measuring instruments?", options: ["The instrument reading zero when not in use", "The discrepancy where the instrument does not read zero when measuring zero magnitude", "The maximum limit of the instrument", "The calibration temperature"], answer: "B" },
+                    { q: "How is a positive zero error corrected in a measurement?", options: ["Added to the final reading", "Subtracted from the final reading", "Multiplied by two", "Ignored entirely"], answer: "B" },
+                    { q: "What is the purpose of plotting a graph in physics experiments?", options: ["To make reports look colorful", "To determine relationships between variables and average out experimental errors", "To hide incorrect data points", "To calculate exact room temperature"], answer: "B" },
+                    { q: "When drawing a line of best fit on a scatter plot, what guideline should be followed?", options: ["Connect every point dot-to-dot with zigzag lines", "Have roughly an equal number of points above and below the line", "Pass through the origin mandatory", "Pass through the highest point only"], answer: "B" },
+                    { q: "How is the slope (gradient) of a straight-line graph calculated?", options: ["Change in y divided by change in x (Delta y / Delta x)", "x multiplied by y", "Sum of x and y", "y-intercept minus x-intercept"], answer: "A" },
+                    { q: "What does the y-intercept of a calibration graph represent?", options: ["The gradient", "The value of y when x is zero", "The maximum error", "The total number of readings"], answer: "B" },
+                    { q: "What is random error in physical measurements?", options: ["Errors caused by faulty instruments that can be calibrated", "Unpredictable fluctuations in readings that can be minimized by taking multiple trials and averaging", "Deliberate falsification of data", "Mathematical constants"], answer: "B" },
+                    { q: "What is systematic error?", options: ["Consistent, repeatable error associated with faulty calibration or experimental setup", "Random arithmetic mistakes", "Variations due to reading angles", "Environmental weather changes"], answer: "A" },
+                    { q: "How can random errors be reduced in an experiment?", options: ["Taking only one careful reading", "Repeating measurements multiple times and calculating the mean", "Using a shorter ruler", "Changing observers every time"], answer: "B" },
+                    { q: "What is the period of a simple pendulum?", options: ["The time taken to complete one full oscillation", "The total time of the experiment", "The length of the string", "The mass of the bob"], answer: "A" },
+                    { q: "In the simple pendulum experiment, how does the period (T) relate to length (L)?", options: ["T is directly proportional to L", "T squared is directly proportional to L", "T is inversely proportional to L", "T is independent of L"], answer: "B" },
+                    { q: "What instrument is used to measure electrical current in a circuit?",options: ["Voltmeter", "Ammeter", "Galvanometer", "Ohmmeter"], answer: "B" },
+                    { q: "How must an ammeter be connected in an electrical circuit?", options: ["In parallel across the component", "In series with the component", "Directly across the battery terminals", "Disconnected from power"], answer: "B" },
+                    { q: "How must a voltmeter be connected to measure potential difference?", options: ["In series", "In parallel across the component", "In reverse polarity", "In series with the switch"], answer: "B" },
+                    { q: "What law is verified when studying current-voltage relationships in metallic conductors?", options: ["Faraday's Law", "Ohm's Law", "Coulomb's Law", "Boyle's Law"], answer: "B" },
+                    { q: "According to Ohm's Law, what represents the resistance of a conductor in a V-I graph?", options: ["The y-intercept", "The reciprocal of the slope", "The slope of the V against I graph", "The product of V and I"], answer: "C" },
+                    { q: "What is the SI unit of electrical resistance?", options: ["Volt", "Ampere", "Ohm", "Watt"], answer: "C" },
+                    { q: "What is the purpose of a potentiometer in electrical experiments?", options: ["To measure high temperatures", "To accurately compare potential differences and measure EMF without drawing current", "To store electrical charge", "To amplify audio signals"], answer: "B" },
+                    { q: "What is Hooke's Law in elasticity?", options: ["Force is inversely proportional to extension", "Extension is directly proportional to the applied force within the elastic limit", "Stress equals strain squared", "Pressure equals force times area"], answer: "B" },
+                    { q: "What does the gradient of a load-extension graph represent in a spring experiment?", options: ["Spring constant (stiffness)", "Potential energy", "Breaking stress", "Density"], answer: "A" },
+                    { q: "What is Young's Modulus?", options: ["Ratio of stress to strain within the elastic limit", "Ratio of force to length", "Ratio of mass to volume", "Ratio of pressure to temperature"], answer: "A" },
+                    { q: "What is the SI unit of Young's Modulus?", options: ["Newton", "Pascal (or N/m²)", "Joule", "Watt"], answer: "B" },
+                    { q: "What is surface tension of a liquid?", options: ["The downward gravitational force", "The elastic property at the liquid surface causing it to behave like a stretched membrane", "The resistance to flow", "The boiling point pressure"], answer: "B" },
+                    { q: "What is viscosity?", options: ["A fluid's internal friction or resistance to flow", "The density of a liquid", "The surface temperature", "The compressibility of gas"], answer: "A" },
+                    { q: "Terminal velocity is reached when:", options: ["Gravitational force equals viscous drag plus upthrust", "Acceleration is maximum", "Velocity is zero", "Object hits the bottom"], answer: "A" },
+                    { q: "What is specific latent heat of fusion?", options: ["Heat required to raise temperature by 1°C", "Heat required to convert a solid to liquid at constant temperature without change in temperature", "Heat required to boil water", "Heat lost to surroundings"], answer: "B" },
+                    { q: "How is calorimeter heat loss corrected in thermal experiments?", options: ["Using lag insulators and cooling correction methods", "Ignoring it", "Adding extra water", "Heating faster"], answer: "A" },
+                    { q: "What is refraction of light?", options: ["Bouncing of light off a mirror", "Bending of light rays as they pass from one optical medium to another of different density", "Splitting of light into colors", "Absorption of light by black surfaces"], answer: "B" },
+                    { q: "Snell's Law of refraction states that:", options: ["Sin i / Sin r = constant (refractive index)", "Angle of incidence equals angle of reflection", "Angle of refraction is zero", "Sin i multiplied by Sin r = 1"], answer: "A" },
+                    { q: "How is the focal length of a convex lens determined experimentally using the u-v method?", options: ["Measuring object distance u and image distance v and using formula f = uv / (u+v)", "Multiplying u and v", "Subtracting v from u", "Measuring lens thickness"], answer: "A" },
+                    { q: "What is total internal reflection?", options: ["Light passing through glass", "Reflection of light back into the denser medium when angle of incidence exceeds critical angle", "Complete absorption of light", "Diffraction around corners"], answer: "B" },
+                    { q: "What is diffraction of light or sound?", options: ["Bending of waves around obstacles and apertures", "Bouncing off mirrors", "Merging of two light beams", "Polarization of waves"], answer: "A" },
+                    { q: "What is resonance in sound waves?", options: ["Complete cancellation of sound", "Vibration of a body at its natural frequency due to matching frequency of another source", "Echo reflection", "Low frequency hum"], answer: "B" },
+                    { q: "How is the speed of sound in air determined using a resonance tube?", options: ["Measuring resonant lengths for specific tuning fork frequencies", "Shouting into a well", "Using a stopwatch over 1km", "Measuring air pressure"], answer: "A" },
+                    { q: "What is the magnetic field?", options: ["Region around a magnet where magnetic forces are experienced", "Area around an electric heater", "Gravitational pull of Earth", "Static electricity charge"], answer: "A" },
+                    { q: "How are magnetic field lines directed outside a bar magnet?", options: ["From South to North", "From North to South", "In concentric circles", "Radially inward"], answer: "B" },
+                    { q: "What is electromagnetic induction?", options: ["Producing an electric current in a circuit by changing magnetic flux linked with the circuit", "Attracting iron nails", "Heating a wire with current", "Charging a battery"], answer: "A" },
+                    { q: "Faraday's Law of electromagnetic induction states that the induced EMF is proportional to:", options: ["Resistance of wire", "Rate of change of magnetic flux linkage", "Temperature of magnet", "Mass of coil"], answer: "B" },
+                    { q: "Lenz's Law gives the direction of:", options: ["Magnetic poles", "Induced current such that it opposes the change producing it", "Gravitational pull", "Electric field lines"], answer: "B" },
+                    { q: "What is a diffraction grating used for in optics?", options: ["Measuring heavy weights", "Splitting light into component wavelengths to measure spectra accurately", "Focusing camera lenses", "Insulating electrical wires"], answer: "B" },
+                    { q: "What is percentage uncertainty formula?", options: ["(Absolute error / Measured value) * 100%", "Measured value * Absolute error", "Absolute error + 100", "Measured value / 100"], answer: "A" },
+                    { q: "When adding quantities with uncertainties, what happens to absolute uncertainties?", options: ["They are added", "They are subtracted", "They are multiplied", "They are ignored"], answer: "A" },
+                    { q: "When multiplying quantities, what happens to percentage uncertainties?", options: ["They are added", "They are subtracted", "They are multiplied", "They are divided"], answer: "A" },
+                    { q: "What is the purpose of a meter bridge in electricity practicals?", options: ["Measuring unknown resistance accurately using balancing length ratios", "Measuring bridge heights", "Measuring liquid flow", "Testing battery voltage"], answer: "A" },
+                    { q: "What is half-deflection method used for in galvanometer experiments?", options: ["Finding internal resistance of a galvanometer", "Doubling current", "Burning the coil", "Measuring magnetic field"], answer: "A" },
+                    { q: "What is a standard cell (like Weston cadmium cell) used for?", options: ["Providing a constant and accurate reference EMF", "Starting car engines", "Powering heavy machines", "Lighting rooms"], answer: "A" },
+                    { q: "What is the critical angle?", options: ["Angle of incidence in denser medium for which angle of refraction in rarer medium is 90°", "Angle of 45 degrees", "Angle of total absorption", "Angle of reflection"], answer: "A" },
+                    { q: "What is dispersion of white light?", options: ["Splitting of white light into constituent spectrum colors through a prism", "Bending of light in water", "Reflection from flat mirrors", "Fading of light intensity"], answer: "A" },
+                    { q: "What is the function of the vernier scale on instruments?", options: ["To enable accurate fractional readings beyond the smallest division of the main scale", "To hold the instrument together", "To measure temperature", "To light up the scale"], answer: "A" },
+                    { q: "What is parallax error?", options: ["Error caused by viewing scale markings from an angle rather than directly perpendicular", "Error due to low battery", "Error from magnetic interference", "Error from temperature change"], answer: "A" },
+                    { q: "How do you avoid parallax error when reading a scale?", options: ["Positioning the eye directly perpendicular to the pointer or meniscus", "Closing one eye", "Using a magnifying glass from the side", "Measuring in the dark"], answer: "A" },
+                    { q: "What is the time period of a wave?", options: ["Time taken for one complete wave cycle to pass a point", "Distance between crests", "Height of wave", "Speed of wave"], answer: "A" },
+                    { q: "What is frequency of a wave?", options: ["Number of complete cycles per second (measured in Hertz)", "Total distance traveled", "Amplitude of vibration", "Wavelength"], answer: "A" },
+                    { q: "How are wavelength (lambda), frequency (f), and wave speed (v) related?", options: ["v = f * lambda", "v = f / lambda", "v = lambda / f", "v = f + lambda"], answer: "A" },
+                    { q: "What is a cathode ray oscilloscope (CRO) used for?", options: ["Visualizing and measuring electrical waveforms and voltages", "Weighing microscopic particles", "Measuring chemical pH", "Detecting radioactivity"], answer: "A" },
+                    { q: "What is Joule heating?", options: ["Heat produced by electric current flowing through a conductor (I²Rt)", "Cooling effect of electricity", "Nuclear fusion heat", "Solar radiation"], answer: "A" },
+                    { q: "Why are experimental results reported with units and appropriate significant figures?", options: ["To reflect the precision of the measuring instrument and maintain scientific rigor", "To make papers longer", "To confuse readers", "To match random guesses"], answer: "A" }
+                ]
+            },
+            "PHY 102": {
+                code: "PHY 102",
+                title: "PHY 102 - General Physics II",
+                school: "School of Computing",
+                questions: [
+                    { q: "What does Coulomb's Law describe?", options: ["Gravitational force between masses", "Electrostatic force between stationary electric charges", "Magnetic force between currents", "Fluid pressure in pipes"], answer: "B" },
+                    { q: "What is the SI unit of electric charge?", options: ["Volt", "Coulomb", "Ampere", "Ohm"], answer: "B" },
+                    { q: "What is electric field intensity (E) at a point defined as?", options: ["Force per unit positive charge experienced by a small test charge", "Charge per unit volume", "Work done per unit charge", "Current per unit area"], answer: "A" },
+                    { q: "What is electric potential difference between two points?", options: ["Work done in moving a unit positive charge from one point to the other", "Total charge stored", "Magnetic flux linkage", "Current flowing per second"], answer: "A" },
+                    { q: "What is the SI unit of electric potential?", options: ["Newton", "Joule", "Volt", "Farad"], answer: "C" },
+                    { q: "What is a capacitor?", options: ["A device that generates electrical power", "A passive electronic component that stores electrical energy in an electrostatic field", "A device that measures current", "A resistor with variable resistance"], answer: "B" },
+                    { q: "What does capacitance (C) measure?", options: ["Resistance to current flow", "Ability of a system to store electric charge per unit potential difference", "Magnetic field strength", "Power consumption"], answer: "B" },
+                    { q: "What is the SI unit of capacitance?", options: ["Henry", "Farad", "Tesla", "Weber"], answer: "B" },
+                    { q: "How is equivalent capacitance calculated for capacitors connected in parallel?", options: ["C_eq = C1 + C2 + C3 ...", "1 / C_eq = 1/C1 + 1/C2 ...", "C_eq = (C1 * C2) / (C1 + C2)", "C_eq = C1 - C2"], answer: "A" },
+                    { q: "How is equivalent capacitance calculated for capacitors in series?", options: ["C_eq = C1 + C2", "1 / C_eq = 1/C1 + 1/C2 + ...", "C_eq = C1 * C2", "C_eq = C1 / C2"], answer: "B" },
+                    { q: "What is electric current?", options: ["Rate of flow of electric charge past a given point", "Total voltage in a circuit", "Magnetic flux density", "Resistance of a conductor"], answer: "A" },
+                    { q: "What is Ohm's Law formula relating Voltage (V), Current (I), and Resistance (R)?", options: ["V = I * R", "I = V * R", "R = V * I", "V = I / R"], answer: "A" },
+                    { q: "What is electrical power (P) dissipated in a resistor given V and I?", options: ["P = V / I", "P = V * I", "P = I² / V", "P = V² * I"], answer: "B" },
+                    { q: "What are Kirchhoff's Circuit Laws?", options: ["Kirchhoff's Current Law (Node rule) and Kirchhoff's Voltage Law (Loop rule)", "Laws of thermodynamics", "Laws of planetary motion", "Electromagnetic wave equations"], answer: "A" },
+                    { q: "Kirchhoff's Current Law (KCL) is based on the conservation of:", options: ["Energy", "Charge", "Momentum", "Mass"], answer: "B" },
+                    { q: "Kirchhoff's Voltage Law (KVL) is based on the conservation of:", options: ["Charge", "Energy", "Angular momentum", "Magnetic flux"], answer: "B" },
+                    { q: "What is magnetic induction (Magnetic field B) measured in?", options: ["Tesla (or Weber per square meter)", "Volt", "Ampere", "Joule"], answer: "A" },
+                    { q: "What force does a moving charge experience in a magnetic field (Lorentz magnetic force)?", options: ["F = q * E", "F = q * (v x B)", "F = m * g", "F = I * L * B"], answer: "B" },
+                    { q: "What is Ampere's Law used for?", options: ["Calculating magnetic field produced by electric currents", "Calculating gravitational pull", "Measuring capacitance", "Determining optical refraction"], answer: "A" },
+                    { q: "What is the Biot-Savart Law used for?", options: ["Determining magnetic field generated by an electric current element", "Calculating resistor heat", "Finding lens focal length", "Measuring fluid velocity"], answer: "A" },
+                    { q: "What is electromagnetic induction?", options: ["Creation of potential difference/current in a circuit due to changing magnetic environment", "Storage of charge in batteries", "Resistance heating", "Electrostatic attraction"], answer: "A" },
+                    { q: "What does Faraday's law of induction state?", options: ["Induced EMF equals rate of change of magnetic flux linkage", "Current is constant", "Voltage equals current times resistance", "Charge is conserved"], answer: "A" },
+                    { q: "What is inductance (L) measured in?", options: ["Henry", "Farad", "Tesla", "Coulomb"], answer: "A" },
+                    { q: "What is an alternating current (AC)?", options: ["Electric current that periodically reverses direction and changes magnitude continuously", "Current that flows in one direction at constant rate", "Static electricity charge", "Battery DC power"], answer: "A" },
+                    { q: "What is the root-mean-square (RMS) value of an AC sinusoidal voltage with peak value V_0?", options: ["V_0 / 2", "V_0 / sqrt(2)", "V_0 * sqrt(2)", "V_0"], answer: "B" },
+                    { q: "What is inductive reactance (X_L) in an AC circuit with frequency f and inductance L?", options: ["X_L = 2 * pi * f * L", "X_L = 1 / (2 * pi * f * L)", "X_L = R", "X_L = L / f"], answer: "A" },
+                    { q: "What is capacitive reactance (X_C) in an AC circuit with frequency f and capacitance C?", options: ["X_C = 2 * pi * f * C", "X_C = 1 / (2 * pi * f * C)", "X_C = C / f", "X_C = 1 / C"], answer: "B" },
+                    { q: "What is impedance (Z) in an AC RLC circuit?", options: ["Total opposition to AC flow combining resistance and reactance", "Pure DC resistance only", "Capacitance multiplied by inductance", "Voltage divided by power"], answer: "A" },
+                    { q: "What is resonance in an RLC series AC circuit?", options: ["When inductive reactance equals capacitive reactance (X_L = X_C), minimizing impedance", "When resistance is zero", "When current is zero", "When frequency is infinite"], answer: "A" },
+                    { q: "What are Maxwell's Equations?", options: ["Four fundamental equations governing classical electromagnetism and optics", "Newton's laws of motion", "Quantum mechanics principles", "Thermodynamics laws"], answer: "A" },
+                    { q: "What do Maxwell's equations predict regarding electromagnetic waves?",options: ["Electromagnetic waves travel at the speed of light", "Light has mass", "Magnetic monopoles exist", "Gravity travels instantly"], answer: "A" },
+                    { q: "What is the speed of electromagnetic waves in a vacuum (c)?", options: ["3 x 10^8 m/s", "3 x 10^6 m/s", "340 m/s", "1.5 x 10^5 m/s"], answer: "A" },
+                    { q: "What is the electromagnetic spectrum in order of increasing frequency?", options: ["Radio, Microwave, Infrared, Visible, Ultraviolet, X-rays, Gamma rays", "Gamma, X-rays, UV, Visible, IR, Microwave, Radio", "Visible, Radio, X-rays, Gamma", "Infrared, Ultraviolet, Radio"], answer: "A" },
+                    { q: "What is wave-particle duality?", options: ["The concept that quantum objects like light and electrons exhibit both wave-like and particle-like properties", "Waves have no energy", "Particles are stationary", "Light is only a particle"], answer: "A" },
+                    { q: "What is the photoelectric effect?", options: ["Emission of electrons from a metal surface when light of sufficient frequency shines on it", "Generation of electricity from water", "Glowing of light bulbs", "Reflection from mirrors"], answer: "A" },
+                    { q: "Who explained the photoelectric effect by introducing photons of energy E = hf?", options: ["Isaac Newton", "Albert Einstein", "James Clerk Maxwell", "Niels Bohr"], answer: "B" },
+                    { q: "What is de Broglie wavelength formula for a particle of momentum p?", options: ["lambda = h / p", "lambda = p / h", "lambda = h * p", "lambda = h * c"], answer: "A" },
+                    { q: "What is the Bohr model of the hydrogen atom?", options: ["Electrons orbit the nucleus in quantized circular orbits without radiating energy", "Electrons are stationary", "Atom is a solid sphere", "Nucleus contains electrons"], answer: "A" },
+                    { q: "What is radioactive decay?", options: ["Spontaneous disintegration of unstable atomic nuclei emitting radiation", "Charging of batteries", "Heating of metals", "Chemical rusting"], answer: "A" },
+                    { q: "What are the three main types of radioactive emissions?", options: ["Alpha, Beta, and Gamma rays", "X-rays, UV, and Infrared", "Protons, Neutrons, Electrons", "Sound, Light, Heat"], answer: "A" },
+                    { q: "What is half-life of a radioactive isotope?", options: ["Time required for half of the radioactive nuclei in a sample to decay", "Total lifetime of the atom", "Time to decay completely", "Time to double mass"], answer: "A" },
+                    { q: "What is nuclear fission?", options: ["Splitting of a heavy atomic nucleus into smaller nuclei releasing immense energy", "Merging of hydrogen atoms", "Radioactive decay of alpha particles", "Chemical combustion"], answer: "A" },
+                    { q: "What is nuclear fusion?", options: ["Combining of light atomic nuclei (like hydrogen isotopes) to form heavier nuclei, releasing energy", "Splitting uranium atoms", "Dissolving salt in water", "Evaporation of liquids"], answer: "A" },
+                    { q: "What power source powers the sun and stars?", options: ["Nuclear fusion", "Nuclear fission", "Chemical combustion", "Gravitational friction"], answer: "A" },
+                    { q: "What is semiconductor physics concerned with?", options: ["Materials with electrical conductivity between conductors and insulators (like silicon and germanium)", "Pure copper wiring", "Plastic insulators", "Superconducting metals at 0K"], answer: "A" },
+                    { q: "What is doping in semiconductors?", options: ["Adding impurity atoms to pure semiconductors to alter electrical conductivity (n-type and p-type)", "Cleaning silicon wafers", "Heating crystals", "Painting surfaces"], answer: "A" },
+                    { q: "What is a p-n junction diode?", options: ["A semiconductor device allowing current to flow easily in one direction while blocking it in the reverse", "A bidirectional resistor", "A battery cell", "An amplifier"], answer: "A" },
+                    { q: "What is a transistor used for in electronics?", options: ["Amplification of signals and electronic switching", "Storing electrical charge", "Measuring voltage", "Producing magnetic fields"], answer: "A" },
+                    { q: "What is Gauss's Law for electricity?", options: ["Total electric flux through a closed surface is proportional to enclosed electric charge", "Magnetic flux is zero", "Current equals voltage over resistance", "Energy is conserved"], answer: "A" },
+                    { q: "What is Gauss's Law for magnetism?", options: ["Net magnetic flux through any closed surface is zero (no magnetic monopoles)", "Magnetic monopoles exist", "Magnetic field equals electric field", "Charge equals mass"], answer: "A" },
+                    { q: "What is Faraday's law in differential/integral form part of?", options: ["Maxwell's equations", "Newton's laws", "Ohm's law", "Bohr's model"], answer: "A" },
+                    { q: "What is displacement current?", options: ["Term added by Maxwell to Ampere's law representing changing electric field acting like a current", "Water current in pipes", "Electron drift velocity", "Battery discharge"], answer: "A" },
+                    { q: "What is Poynting vector?", options: ["Vector representing directional energy flux (power transfer per unit area) of an electromagnetic field", "Velocity of particles", "Magnetic force direction", "Momentum of light"], answer: "A" },
+                    { q: "What is polarization of light?", options: ["Restriction of the vibration of electromagnetic field vectors to a single plane", "Splitting into colors", "Bending around obstacles", "Reflection from metals"], answer: "A" },
+                    { q: "What is interference of light?", options: ["Superposition of two or more light waves resulting in a new wave pattern of constructive and destructive reinforcement", "Absorption of light", "Scattering by dust", "Bending in prisms"], answer: "A" },
+                    { q: "What is Young's double-slit experiment?", options: ["Demonstration of the wave nature and interference of light using two closely spaced slits", "Measurement of electron charge", "Test of relativity", "Photoelectric test"], answer: "A" },
+                    { q: "What is diffraction grating formula?", options: ["d * sin(theta) = n * lambda", "d = n * lambda", "sin(theta) = d", "lambda = d * n"], answer: "A" },
+                    { q: "What is special relativity principle?", options: ["Laws of physics are invariant in all inertial reference frames, and speed of light in vacuum is constant", "Time is absolute", "Mass is constant", "Gravity is a force"], answer: "A" },
+                    { q: "What is Einstein's mass-energy equivalence formula?", options: ["E = m * c²", "E = m * g * h", "E = 1/2 * m * v²", "E = h * f"], answer: "A" },
+                    { q: "What is Planck's constant (h) fundamental to?", options: ["Quantum mechanics", "Classical mechanics", "Thermodynamics", "Geometrical optics"], answer: "A" }
+                ]
+            },
+            "COS 102": {
+                code: "COS 102",
+                title: "COS 102 - Problem Solving",
+                school: "School of Computing",
+                questions: [
+                    { q: "What is problem solving in computer science and programming?", options: ["Guessing random code solutions", "The systematic process of formulating problems, designing algorithms, and implementing computational solutions", "Installing software packages", "Repairing computer hardware"], answer: "B" },
+                    { q: "What is an algorithm?", options: ["A physical computer chip", "A step-by-step finite procedure or set of rules for solving a specific problem", "A programming language syntax error", "An encrypted database file"], answer: "B" },
+                    { q: "What is pseudocode?", options: ["An informal high-level description of an algorithm's operating principle using structured plain English", "Machine language binary code", "Compiled C++ executable", "Corrupted source code"], answer: "A" },
+                    { q: "What is a flowchart?", options: ["A graphical representation of an algorithm using standard geometric symbols and flow arrows", "A network diagram of routers", "A financial spreadsheet chart", "A database ER diagram"], answer: "A" },
+                    { q: "In flowcharts, what does a rectangular box represent?", options: ["Decision point (Yes/No)", "Process, calculation, or assignment statement", "Input/Output operation", "Start or end terminal"], answer: "B" },
+                    { q: "In flowcharts, what does a diamond shape represent?", options: ["Process step", "Decision or conditional branch", "Input/Output data", "Connector symbol"], answer: "B" },
+                    { q: "What is computational thinking?", options: ["Thinking like a supercomputer", "Solving problems, designing systems, and understanding human behavior by drawing on concepts fundamental to computer science", "Memorizing syntax rules", "Repairing circuit boards"], answer: "B" },
+                    { q: "What are the four pillars of computational thinking?", options: ["Decomposition, Pattern Recognition, Abstraction, and Algorithms", "Input, Output, Storage, Processing", "Syntax, Semantics, Compilation, Execution", "HTML, CSS, JavaScript, SQL"], answer: "A" },
+                    { q: "What is decomposition in problem solving?", options: ["Breaking down a complex problem or system into smaller, more manageable parts", "Combining multiple programs into one", "Deleting unused files", "Encrypting database records"], answer: "A" },
+                    { q: "What is pattern recognition in problem solving?", options: ["Identifying similarities, trends, and patterns among or within problems", "Recognizing faces in photos", "Matching CSS styles", "Sorting lists alphabetically"], answer: "A" },
+                    { q: "What is abstraction in computational thinking?", options: ["Removing unnecessary detail to focus on core essential concepts", "Making code overly complex", "Writing abstract art", "Hanging paintings"], answer: "A" },
+                    { q: "What is algorithmic thinking?", options: ["Designing a clear, ordered sequence of instructions to solve a problem", "Random trial and error", "Guessing answers", "Memorizing math tables"], answer: "A" },
+                    { q: "What is a variable in programming?", options: ["A fixed mathematical constant", "A named storage location in memory that holds a value during program execution", "An internet router address", "A hardware cooling fan"], answer: "B" },
+                    { q: "What is a data type?", options: ["The physical color of a computer monitor", "An attribute of data that tells the compiler or interpreter how the programmer intends to use the data", "The speed of a hard drive", "The size of a file in bytes"], answer: "B" },
+                    { q: "Which of the following is a fundamental primitive data type representing whole numbers?", options: ["String", "Integer (int)", "Boolean", "Float"], answer: "B" },
+                    { q: "What does a Boolean data type represent?", options: ["Text strings", "Decimal numbers", "True or False logical values", "Complex matrices"], answer: "C" },
+                    { q: "What is a conditional statement (if-else)?", options: ["A loop that runs forever", "A programming construct that performs different computations or actions depending on whether a boolean condition evaluates to true or false", "An error handling routine", "A variable declaration"], answer: "B" },
+                    { q: "What is a loop (iteration) in programming?", options: ["A bug that crashes the program", "A programming structure that repeats a block of code multiple times until a terminating condition is met", "A network cable connection", "A database backup"], answer: "B" },
+                    { q: "What is the difference between a `for` loop and a `while` loop?", options: ["`for` loops are typically used for a known number of iterations, while `while` loops run based on a conditional expression", "There is no technical difference", "`while` loops are faster than `for` loops", "`for` loops cannot use variables"], answer: "A" },
+                    { q: "What is an infinite loop?", options: ["A loop that executes efficiently", "A coding error where the terminating condition is never met, causing the loop to run indefinitely", "A loop with zero iterations", "A recursive function"], answer: "B" },
+                    { q: "What is a function or subroutine in programming?", options: ["A hardware component", "A reusable block of code designed to perform a specific task", "A database table", "An operating system kernel"], answer: "B" },
+                    { q: "What is recursion in computer science?", options: ["A function calling itself to solve a smaller instance of the same problem", "Repeating code using a `for` loop", "Copying files to backup", "Deleting duplicate records"], answer: "A" },
+                    { q: "What is a base case in recursive functions?", options: ["The condition under which the recursion stops and returns a result without further recursive calls", "The starting point of the program", "The main menu loop", "The database connection string"], answer: "A" },
+                    { q: "What is an array or list data structure?", options: ["A single variable holding only one number", "A collection of items stored at contiguous or indexed memory locations", "An encrypted password file", "A network routing table"], answer: "B" },
+                    { q: "What is linear search?", options: ["Searching a sorted list by repeatedly dividing the search interval in half", "A method of checking each element in a list sequentially until the target is found or list ends", "Sorting a list from smallest to largest", "Hashing array values"], answer: "B" },
+                    { q: "What is binary search?", options: ["An efficient search algorithm that finds the position of a target value within a sorted array by repeatedly dividing the search range in half", "Searching elements one by one from start", "Searching binary files", "Random guessing"], answer: "A" },
+                    { q: "What is the time complexity of binary search on a sorted array of size n?", options: ["O(n)", "O(n²)", "O(log n)", "O(1)"], answer: "C" },
+                    { q: "What is the time complexity of linear search?", options: ["O(n)", "O(log n)", "O(1)", "O(n²)"], answer: "A" },
+                    { q: "What is Big O notation used for?", options: ["Measuring the exact physical execution time in seconds on a specific computer", "Describing the asymptotic upper bound performance and scalability of an algorithm", "Measuring code line count", "Counting storage bytes"], answer: "B" },
+                    { q: "What does Big O complexity O(1) represent?", options: ["Linear time", "Constant time execution regardless of input size", "Quadratic time", "Logarithmic time"], answer: "B" },
+                    { q: "What is sorting in computer science?", options: ["Deleting duplicate files", "Arranging items in a specified order (e.g., ascending or descending)", "Searching for missing numbers", "Encrypting data"], answer: "B" },
+                    { q: "Which sorting algorithm repeatedly swaps adjacent elements if they are in the wrong order?", options: ["Merge sort", "Bubble sort", "Binary search", "Quick sort"], answer: "B" },
+                    { q: "What is debugging?", options: ["Writing new code", "The process of identifying, analyzing, and removing errors or bugs from computer software", "Installing antivirus software", "Formatting hard drives"], answer: "B" },
+                    { q: "What is a syntax error?", options: ["An error in program logic where output is wrong", "An error where code violates the grammatical rules of the programming language and fails compilation", "A hardware power failure", "A network timeout"], answer: "B" },
+                    { q: "What is a runtime error?", options: ["An error that occurs while the program is executing (e.g., division by zero or accessing invalid memory)", "A typo in code spotted by compiler", "A design flaw", "A spelling mistake in comments"], answer: "A" },
+                    { q: "What is a logical error?", options: ["An error where the program runs without crashing but produces incorrect or unintended results", "A syntax compilation failure", "A missing semicolon", "A broken network cable"], answer: "A" },
+                    { q: "What is modular programming?", options: ["Writing all code in a single massive file", "The process of subdividing a computer program into separate sub-programs called modules", "Using multiple monitors", "Writing code in binary"], answer: "B" },
+                    { q: "What is top-down design in problem solving?", options: ["Breaking a problem from the highest level overview down into detailed sub-problems", "Building hardware from bottom up", "Reading books backwards", "Writing code from bottom line up"], answer: "A" },
+                    { q: "What is bottom-up design?", options: ["Starting with basic primitive components and combining them to build more complex systems", "Starting with final product and deleting features", "Testing code after deployment", "Working night shifts"], answer: "A" },
+                    { q: "What is a stack data structure?", options: ["A First-In, First-Out (FIFO) collection", "A Last-In, First-Out (LIFO) collection where insertions and deletions occur at the same end", "A random access table", "A linked graph"], answer: "B" },
+                    { q: "What is a queue data structure?", options: ["A Last-In, First-Out (LIFO) structure", "A First-In, First-Out (FIFO) collection where elements are added at the back and removed from the front", "A sorted binary tree", "An unordered set"], answer: "B" },
+                    { q: "What is a hash table?", options: ["A data structure used to implement an associative array mapping keys to values using a hash function", "A spreadsheet table", "A linear array", "A syntax tree"], answer: "A" },
+                    { q: "What is a graph data structure in computer science?", options: ["A bar chart or pie chart", "A collection of nodes (vertices) connected by edges representing networks or relationships", "A database query report", "An image file format"], answer: "B" },
+                    { q: "What is a tree data structure?", options: ["A hierarchical data structure consisting of a root node and child nodes with parent-child relationships", "A forest ecosystem simulation", "A linear linked list", "A hash map"], answer: "A" },
+                    { q: "What is brute force problem solving?", options: ["Using physical force on computer hardware", "An exhaustive problem-solving approach that tries every possible solution until finding the correct one", "Using advanced artificial intelligence", "Random guessing without logic"], answer: "B" },
+                    { q: "What is dynamic programming?", options: ["Writing code that changes while running", "An algorithmic technique for solving complex problems by breaking them down into simpler overlapping subproblems and storing results (memoization)", "Updating user interfaces", "Streaming videos online"], answer: "B" },
+                    { q: "What is greedy algorithm design?", options: ["An algorithm that makes the locally optimal choice at each stage with the intent of finding a global optimum", "An algorithm that takes all computer memory", "Slow computational processing", "Random choice selection"], answer: "A" },
+                    { q: "What is test-driven development (TDD)?", options: ["Writing tests before writing the actual code to fulfill requirements", "Testing software only after complete release", "Manual user testing", "Deleting test files"], answer: "A" },
+                    { q: "What is code refactoring?", options: ["Rewriting code from scratch", "The process of restructuring existing computer code without changing its external behavior to improve readability and maintainability", "Deleting error logs", "Adding more comments"], answer: "B" },
+                    { q: "What is an API endpoint in software design?", options: ["A physical power plug on a server", "A specific URL or URI where an API can access the resources requested by a client application", "The end of a software project contract", "A database shutdown command"], answer: "B" },
+                    { q: "What is object-oriented programming (OOP)?", options: ["A programming paradigm based on the concept of 'objects' containing data and methods", "Procedural line-by-line coding", "Assembly language programming", "Database administration"], answer: "A" },
+                    { q: "What is encapsulation in OOP?", options: ["Hiding internal object data and restricting access, bundling data and methods into a single unit", "Opening multiple files", "Writing public variables", "Encrypting hard drives"], answer: "A" },
+                    { q: "What is inheritance in OOP?", options: ["Passing money to heirs", "A mechanism where a new class inherits properties and methods of an existing class", "Deleting old code", "Copying files between servers"], answer: "B" },
+                    { q: "What is polymorphism in OOP?", options: ["Using multiple programming languages", "The ability of different classes to respond to the same method call through distinct implementations", "Changing computer shapes", "Running multiple CPUs"], answer: "B" },
+                    { q: "What is software version control?", options: ["Tracking and managing changes to software code over time using systems like Git", "Checking software prices", "Testing app loading speed", "Managing server operating systems"], answer: "A" },
+                    { q: "What is software documentation?", options: ["Written text or illustrations that explain how a software system operates or how to use it", "Source code files", "Compiled binary executables", "Error log outputs"], answer: "A" },
+                    { q: "What is system analysis in software engineering?", options: ["Repairing broken monitors", "The process of studying a business problem or process to determine how to solve it through information systems", "Selling computer hardware", "Writing marketing brochures"], answer: "A" },
+                    { q: "What is heuristic problem solving?", options: ["A practical method or rule of thumb not guaranteed to be optimal or perfect, but sufficient for immediate goals", "Mathematical proof", "Exhaustive brute force", "Random guessing"], answer: "A" },
+                    { q: "Why is problem-solving decomposition important in software design?", options: ["It breaks overwhelming problems into manageable, solvable modules", "It makes code run slower", "It increases file size", "It eliminates testing requirements"], answer: "A" },
+                    { q: "What is the ultimate goal of computational problem-solving?", options: ["To write efficient, reliable, and correct automated solutions to real-world problems", "To use the most expensive computers", "To write the longest code possible", "To avoid documentation"], answer: "A" }
+                ]
+            },
+            "GST 122": {
+                code: "GST 122",
+                title: "GST 122 - Communication Skills in English II",
+                school: "General Studies",
+                questions: [
+                    { q: "What is the primary objective of effective communication in academic and professional contexts?", options: ["To confuse the audience with complex jargon", "To transmit information clearly and achieve mutual understanding between sender and receiver", "To write as many pages as possible", "To speak without pausing"], answer: "B" },
+                    { q: "Which of the following is an example of non-verbal communication?", options: ["Formal business letter", "Facial expressions, body posture, and gestures", "Telephone conversation", "Academic textbook"], answer: "B" },
+                    { q: "What is active listening?", options: ["Hearing sounds without paying attention", "Fully concentrating, understanding, responding, and remembering what is being said", "Interrupting the speaker to give advice", "Reading notes while someone talks"], answer: "B" },
+                    { q: "What is the purpose of skimming a reading passage?", options: ["Reading every single word meticulously", "Rapidly glancing over a text to get a general overview and main ideas", "Memorizing every detail", "Checking for spelling mistakes"], answer: "B" },
+                    { q: "What is scanning in reading comprehension?", options: ["Reading a text line by line slowly", "Looking rapidly through a text to locate specific facts, names, or dates", "Translating text into another language", "Printing a hard copy"], answer: "B" },
+                    { q: "What is the topic sentence of a paragraph?", options: ["The concluding summary sentence", "The sentence that states the main idea or central theme of the paragraph", "The first reference citation", "The longest sentence"], answer: "B" },
+                    { q: "What is paragraph coherence?", options: ["Random arrangement of sentences", "The logical flow and smooth connection of ideas from one sentence to another", "Using difficult vocabulary words", "Writing long paragraphs"], answer: "B" },
+                    { q: "What is paragraph unity?", options: ["Having all sentences in a paragraph relate directly to the single main topic sentence", "Repeating the same word 10 times", "Writing paragraphs of equal length", "Combining two different topics"], answer: "A" },
+                    { q: "What is formal register in English usage?", options: ["Slang used among close friends", "Language style appropriate for academic essays, professional reports, and official speeches", "Casual spoken dialogue", "Poetic nursery rhymes"], answer: "B" },
+                    { q: "What is informal register?", options: ["Official government document language", "Casual, relaxed language used in everyday conversation with friends and family", "Legal contract wording", "Academic journal articles"], answer: "B" },
+                    { q: "What is the correct structure of a formal business letter?", options: ["Sender address, date, recipient address, salutation, body paragraphs, complimentary close, signature", "Just a signature and message", "Salutation and smiley face", "Title and conclusion only"], answer: "A" },
+                    { q: "What is the purpose of an abstract in an academic research paper?", options: ["To provide a concise summary of the entire research study", "To list author hobbies", "To give book prices", "To provide blank writing space"], answer: "A" },
+                    { q: "What is plagiarism in academic writing?", options: ["Using correct citation styles", "Presenting someone else's work, ideas, or words as your own without proper acknowledgment", "Writing original research", "Summarizing a textbook"], answer: "B" },
+                    { q: "What is a bibliography or reference list?", options: ["A list of sources cited in a research paper, formatted according to a specific style guide", "A dictionary of difficult words", "A table of contents", "An index of chapters"], answer: "A" },
+                    { q: "What is critical reading?", options: ["Finding faults in every book", "An active analytical process of evaluating the validity, evidence, and arguments presented in a text", "Reading novels before sleeping", "Skimming news headlines"], answer: "B" },
+                    { q: "What is the difference between fact and opinion?", options: ["Facts can be verified as true or false with evidence, while opinions express personal beliefs or value judgments", "Facts are always longer than opinions", "Opinions are written by professors", "There is no difference"], answer: "A" },
+                    { q: "What is the purpose of persuasive speaking or writing?", options: ["To entertain with jokes", "To convince the audience to adopt a particular viewpoint or take specific action", "To report raw weather statistics", "To recite a story"], answer: "B" },
+                    { q: "What is an impromptu speech?", options: ["A speech prepared and rehearsed for weeks", "A speech delivered with little or no advance preparation", "A reading from a manuscript", "A recorded video podcast"], answer: "B" },
+                    { q: "What is extemporaneous speaking?", options: ["Speaking completely unprepared", "Speaking conversationally from well-prepared notes and outlines", "Memorizing word-for-word text", "Reading aloud from a book"], answer: "B" },
+                    { q: "What is the role of visual aids (like PowerPoint slides) in presentations?", options: ["To replace the speaker entirely", "To reinforce key points, clarify data, and enhance audience engagement", "To fill dead silence with music", "To display long paragraphs of text to read aloud"], answer: "B" },
+                    { q: "What is denotation of a word?", options: ["The dictionary definition or literal meaning of a word", "The emotional feeling associated with a word", "The opposite meaning", "The phonetic pronunciation"], answer: "A" },
+                    { q: "What is connotation?", options: ["The literal dictionary meaning", "The emotional or cultural associations connected to a word beyond its literal definition", "The spelling of a word", "The grammatical tense"], answer: "B" },
+                    { q: "What is an antonym?", options: ["A word with the exact same meaning", "A word of opposite meaning", "A word that sounds similar", "A root prefix"], answer: "B" },
+                    { q: "What is a synonym?", options: ["A word with a similar meaning to another word", "An opposite word", "A misspelled word", "A foreign word"], answer: "A" },
+                    { q: "What is an idiom?", options: ["A grammatical error", "An expression whose meaning is not predictable from the usual meanings of its individual words", "A scientific formula", "A dictionary entry"], answer: "B" },
+                    { q: "What is a thesis statement in an essay?", options: ["A concluding question", "A single sentence that expresses the central argument or purpose of the essay", "The title of the book", "A reference citation"], answer: "B" },
+                    { q: "What is editing in the writing process?", options: ["Checking grammar, punctuation, spelling, and sentence structure", "Brainstorming initial ideas", "Publishing online", "Tearing up paper"], answer: "A" },
+                    { q: "What is revising in writing?", options: ["Fixing typos", "Reviewing and reorganizing content to improve clarity, argument strength, and flow", "Printing multiple copies", "Binding the cover"], answer: "B" },
+                    { q: "What is a memorandum (memo)?", options: ["A long historical novel", "A short official written note used for internal communication within an organization", "A formal marriage certificate", "A newspaper advertisement"], answer: "B" },
+                    { q: "What is minutes of a meeting?", options: ["The exact duration of a meeting", "The official written record of discussions, decisions, and action items from a meeting", "Future meeting dates", "Attendee seating chart"], answer: "B" },
+                    { q: "What is an agenda?", options: ["A list of items to be discussed or accomplished during a meeting", "A summary report after a meeting", "A list of guest speakers' biographies", "A travel itinerary"], answer: "A" },
+                    { q: "What is technical report writing?", options: ["Writing fiction stories", "Presenting technical information, research findings, or project progress clearly and objectively to decision-makers", "Poetic essay composition", "Journalistic gossip columns"], answer: "B" },
+                    { q: "What is an executive summary?", options: ["A brief overview of a longer report highlighting key findings and recommendations for busy executives", "A biography of the CEO", "The final appendix", "The cover page design"], answer: "A" },
+                    { q: "What is emphatic stress in spoken English?", options: ["Speaking in a whisper", "Placing greater vocal emphasis on certain words to highlight importance or contrast", "Speaking as fast as possible", "Changing pitch randomly"], answer: "B" },
+                    { q: "What is intonation in speech?", options: ["The rise and fall of the voice pitch when speaking", "The volume of breathing", "Hand gestures", "Facial expressions"], answer: "A" },
+                    { q: "What is a cliché?", options: ["An original poetic metaphor", "An overused expression or idea that has lost its original impact", "A grammatical rule", "A foreign idiom"], answer: "B" },
+                    { q: "What is unambiguous communication?", options: ["Communication that is clear, precise, and leaves no room for multiple confusing interpretations", "Vague and mysterious language", "Speaking in riddles", "Using unknown vocabulary"], answer: "A" },
+                    { q: "What is the purpose of transition words (e.g., 'furthermore', 'however', 'consequently')?", options: ["To confuse readers", "To signal logical relationships and guide the reader smoothly between ideas", "To increase word count artificially", "To end sentences abruptly"], answer: "B" },
+                    { q: "What is concise writing?", options: ["Using as many words as possible", "Expressing much in few words without omitting essential information", "Writing in shorthand symbols", "Omitting verbs"], answer: "B" },
+                    { q: "What is audience analysis in communication?", options: ["Studying audience demographics, knowledge level, and expectations to tailor the message effectively", "Counting how many people attend a lecture", "Watching audience facial expressions during a movie", "Checking ticket sales"], answer: "A" },
+                    { q: "What is feedback in the communication process?", options: ["The receiver's response that lets the sender know how the message was interpreted", "Static interference on a telephone line", "The original message transmission", "Background noise"], answer: "A" },
+                    { q: "What is semantic noise in communication barriers?", options: ["Loud music playing outside", "Misunderstandings arising from different interpretations of words and symbols", "Poor hearing ability", "Physical distance"], answer: "B" },
+                    { q: "What is psychological noise?", options: ["Mental distractions, biases, or stress that interfere with effective message reception", "Soundproofing walls", "Headphones volume", "Speech stuttering"], answer: "A" },
+                    { q: "What is inductive paragraph structure?", options: ["Starting with supporting details and examples, leading up to the main idea/conclusion", "Starting with the main thesis and giving details after", "Writing without a conclusion", "Listing random facts"], answer: "A" },
+                    { q: "What is deductive paragraph structure?", options: ["Starting with the main idea or topic sentence, followed by supporting details and evidence", "Ending with the topic sentence", "Telling a chronological story", "Writing in reverse order"], answer: "A" },
+                    { q: "What is paraphrasing?", options: ["Copying a text word-for-word in quotation marks", "Restating someone else's ideas in your own words while retaining the original meaning", "Translating into another language", "Summarizing in one sentence"], answer: "B" },
+                    { q: "What is summarizing?", options: ["Condensing a long text to capture only its main points and core essence", "Writing a longer version of the text", "Copying the introduction", "Rewriting every sentence"], answer: "A" },
+                    { q: "What is a rhetorical question?", options: ["A question requiring an immediate written quiz answer", "A question asked for effect or to make a point rather than to get an answer", "An exam question", "A confused inquiry"], answer: "B" },
+                    { q: "What is body language in interpersonal communication?", options: ["Physical behaviors, expressions, and posture communicating thoughts and feelings subconsciously or consciously", "Spoken words", "Written notes", "Telephone signals"], answer: "A" },
+                    { q: "What is a professional resume/CV?", options: ["A detailed document summarizing education, work experience, skills, and achievements for job applications", "A personal diary", "A love letter", "A novel manuscript"], answer: "A" },
+                    { q: "What is an interview?", options: ["A formal conversation where an interviewer assesses a candidate's suitability for a position", "A casual chat with friends", "A written multiple-choice test", "A public speech"], answer: "A" },
+                    { q: "What is tone in writing?", options: ["The author's attitude toward the subject matter or audience", "The font size used", "The paper color", "The book weight"], answer: "A" },
+                    { q: "What is style in writing?", options: ["The unique way an author uses words, sentence structure, and choices to express ideas", "Clothing fashion", "Typing speed", "Grammar mistakes"], answer: "A" },
+                    { q: "What is proofreading?", options: ["The final check of a completed draft specifically for typos, punctuation errors, and formatting flaws", "Writing first drafts", "Brainstorming topics", "Researching library books"], answer: "A" },
+                    { q: "What is public speaking anxiety (stage fright)?", options: ["Nervousness or fear experienced when speaking in front of an audience", "Physical exhaustion from running", "Sleep disorder", "Hearing loss"], answer: "A" },
+                    { q: "What is the rule of thumb for effective presentations?", options: ["Tell them what you will say, say it, then tell them what you said", "Speak as fast as possible", "Never look at the audience", "Turn off all lights"], answer: "A" },
+                    { q: "What is persuasive writing?", options: ["Writing designed to influence reader opinions or actions through logical and emotional appeals", "Describing weather facts", "Writing fiction stories", "Listing grocery items"], answer: "A" },
+                    { q: "What is informative writing?", options: ["Writing aimed at educating or explaining facts and concepts clearly without bias", "Expressing personal anger", "Writing poetry", "Telling jokes"], answer: "A" },
+                    { q: "Why is clarity the paramount virtue of professional communication?", options: ["It ensures instructions and ideas are instantly understood without ambiguity", "It makes documents longer", "It uses difficult words", "It hides mistakes"], answer: "A" }
+                ]
+            },
+            "GST 112": {
+                code: "GST 112",
+                title: "GST 112 - Nigerian Peoples and Culture",
+                school: "General Studies",
+                questions: [
+                    { q: "What is the geographical location of Nigeria in Africa?", options: ["Southern Africa", "West Africa", "East Africa", "North Africa"], answer: "B" },
+                    { q: "Which bodies of water border Nigeria to the south?", options: ["Atlantic Ocean (Gulf of Guinea)", "Indian Ocean", "Mediterranean Sea", "Red Sea"], answer: "A" },
+                    { q: "In which year was the amalgamation of Northern and Southern Nigeria carried out by Lord Lugard?", options: ["1861", "1914", "1922", "1960"], answer: "B" },
+                    { q: "Who was the British colonial governor-general responsible for the 1914 amalgamation of Nigeria?", options: ["Sir George Goldie", "Lord Frederick Lugard", "Mungo Park", "Hugh Clifford"], answer: "B" },
+                    { q: "What major river confluence in Nigeria gives the country its name?", options: ["Niger and Benue", "Ogun and Osun", "Cross River and Imo", "Kaduna and Sokoto"], answer: "A" },
+                    { q: "What are the three major ethnic groups in Nigeria?", options: ["Efik, Tiv, Ijaw", "Hausa-Fulani, Yoruba, Igbo", "Kanuri, Nupe, Igala", "Bini, Urhobo, Itsekiri"], answer: "B" },
+                    { q: "What is the significance of the Nok culture in Nigerian history?", options: ["Early iron-working and remarkable terracotta sculpture tradition", "Introduction of Islam", "Building of ancient railways", "Discovery of crude oil"], answer: "A" },
+                    { q: "In which part of Nigeria is the Nok archaeological culture primarily located?", options: ["Southern Delta", "Northern/Central Nigeria (Kaduna/Jos area)", "Western border", "Eastern coastline"], answer: "B" },
+                    { q: "What ancient Nigerian civilization is world-famous for sophisticated lost-wax brass casting?", options: ["Ife and Benin kingdoms", "Sokoto Caliphate", "Kanem-Bornu Empire", "Oyo Empire"], answer: "A" },
+                    { q: "What was the capital of the ancient Oyo Empire?", options: ["Oyo-Ile (Katunga)", "Ibadan", "Ogbomoso", "Oshogbo"], answer: "A" },
+                    { q: "Who was Oduduwa according to Yoruba oral tradition and mythology?", options: ["The legendary ancestor and founder of the Yoruba nation", "The first Emir of Kano", "The founder of Nri Kingdom", "A colonial merchant"], answer: "A" },
+                    { q: "According to Igbo oral tradition, what town is regarded as the spiritual center and cradle of Igbo civilization?", options: ["Aba", "Nri", "Onitsha", "Owerri"], answer: "B" },
+                    { q: "What political system characterized the pre-colonial Igbo society?", options: ["Centralized monarchy with absolute kings", "Segmental/acephalous (republican) system with village assemblies and title societies", "Military dictatorship", "Feudal vassalage"], answer: "B" },
+                    { q: "What political system characterized the pre-colonial Hausa-Fulani states before the 1804 Jihad?", options: ["Sarkin (monarchical city-states)", "Democratic parliament", "Communal tribal councils", "Nomadic chiefdoms"], answer: "A" },
+                    { q: "Who led the 1804 Islamic Jihad in Northern Nigeria that established the Sokoto Caliphate?", options: ["Uthman dan Fodio", "Al-Kanemi", "Muhammadu Buhari", "Bello"], answer: "A" },
+                    { q: "What was the administrative language introduced and spread across Northern Nigeria by the Sokoto Caliphate?", options: ["Arabic and Hausa", "Yoruba", "Igbo", "French"], answer: "A" },
+                    { q: "What is cultural heritage?", options: ["Modern factory machinery", "The legacy of physical artifacts and intangible attributes of a group or society inherited from past generations", "Foreign fashion trends", "Government tax laws"], answer: "B" },
+                    { q: "What is the difference between material and non-material culture?", options: ["Material culture consists of physical objects, while non-material culture consists of ideas, beliefs, values, and norms", "Material culture is permanent, non-material culture does not exist", "There is no difference", "Material culture is spoken words only"], answer: "A" },
+                    { q: "What role does language play in culture?", options: ["It is merely for decoration", "It is the primary vehicle for expressing, transmitting, and preserving cultural heritage and identity", "It hinders communication", "It changes every day"], answer: "B" },
+                    { q: "What is ethnocentrism?", options: ["Appreciating all cultures equally", "The tendency to judge other cultures by the standards and values of one's own culture, often viewing it as superior", "Studying international relations", "Traveling abroad"], answer: "B" },
+                    { q: "What is cultural relativism?", options: ["Believing your culture is best", "The principle of understanding and evaluating a culture on its own terms rather than judging it by another culture's standards", "Copying foreign traditions", "Rejecting all history"], answer: "B" },
+                    { q: "What is national integration in Nigeria?", options: ["Dividing the country into separate nations", "The process of uniting diverse ethnic, religious, and linguistic groups into a cohesive national identity", "Enforcing a single religion", "Merging state capitals"], answer: "B" },
+                    { q: "What agency was established in Nigeria to promote national unity, youth service, and cultural exchange among graduates?", options: ["EFCC", "NYSC (National Youth Service Corps)", "JAMB", "CBN"], answer: "B" },
+                    { q: "What is federal character principle in Nigeria?", options: ["A policy designed to ensure representation of all states and ethnic groups in government positions and institutions", "A tax collection method", "A football tournament rule", "A military promotion standard"], answer: "A" },
+                    { q: "In what year did Nigeria gain independence from British colonial rule?", options: ["1914", "1954", "1960", "1963"], answer: "C" },
+                    { q: "In what year did Nigeria become a Republic?", options: ["1960", "1963", "1979", "1999"], answer: "B" },
+                    { q: "What historical event in Nigeria occurred between 1967 and 1970?", options: ["The Nigerian Civil War (Biafran War)", "The 1914 Amalgamation", "The Aba Women's Riot", "The introduction of Naira currency"], answer: "A" },
+                    { q: "What is the significance of the Aba Women's War (Riots) of 1929?", options: ["A major anti-colonial revolt by women in Eastern Nigeria against oppressive taxation policies", "A fashion exhibition", "A sports festival", "A constitutional conference"], answer: "A" },
+                    { q: "What traditional institution in Benin Kingdom is renowned worldwide for ivory carving and bronze metallurgy?", options: ["Oba of Benin", "Sultan of Sokoto", "Alaafin of Oyo", "Obi of Onitsha"], answer: "A" },
+                    { q: "What is the primary economic mainstay of Nigeria since the 1970s?", options: ["Palm oil export", "Petroleum (Crude Oil) production", "Cocoa farming", "Cotton manufacturing"], answer: "B" },
+                    { q: "What pre-colonial trade network connected North Africa across the Sahara Desert with the Savannah states of Nigeria?", options: ["Trans-Saharan Trade", "Trans-Atlantic Slave Trade", "Silk Road", "East African Spice Route"], answer: "A" },
+                    { q: "What religion was introduced to Hausaland through trans-Saharan trade long before European contact?", options: ["Islam", "Christianity", "Hinduism", "Buddhism"], answer: "A" },
+                    { q: "Through which coastal region did European Christian missionaries primarily enter Southern Nigeria in the 19th century?", options: ["Badagry and Calabar/Niger Delta", "Sokoto desert", "Lake Chad basin", "Mambilla plateau"], answer: "A" },
+                    { q: "What is the significance of festivals like Argungu, Osun-Osogbo, and New Yam festival in Nigerian culture?", options: ["They celebrate ancestral heritage, religious thanksgiving, and community solidarity", "They are political election rallies", "They are tax collection deadlines", "They are military drills"], answer: "A" },
+                    { q: "What is indigenous knowledge system (IKS)?", options: ["Foreign imported technology", "The traditional understanding, skills, and philosophies developed by local communities over generations", "Modern university textbooks", "Computer coding manuals"], answer: "B" },
+                    { q: "What is the role of traditional rulers in modern Nigeria?", options: ["They hold absolute executive power", "They serve as custodians of culture, peace-building, and grassroots conflict resolution", "They command the national army", "They collect national income taxes"], answer: "B" },
+                    { q: "What is the significance of family structure in Nigerian traditional society?", options: ["Extended family provides social security, mutual support, and moral upbringing", "Nuclear family lives in total isolation", "Family has no importance", "Children leave home at age 5"], answer: "A" },
+                    { q: "What is gender role differentiation in traditional Nigerian societies?", options: ["Rigid division where women had no economic rights", "Complementary roles in agriculture, trade, domestic management, and community leadership", "Men doing all farm work exclusively", "Women holding all political offices"], answer: "B" },
+                    { q: "What is the significance of naming ceremonies in many Nigerian cultures?", options: ["They formally welcome the newborn into the community with prayers, historical reflection, and identity", "They are legal birth certificate filings", "They decide school admissions", "They assign tax numbers"], answer: "A" },
+                    { q: "What is the moral philosophy of 'Omoluabi' in Yoruba culture?", options: ["A person of good character, integrity, respect, and diligence", "A wealthy merchant", "A warrior king", "A religious cleric"], answer: "A" },
+                    { q: "What is the Igbo concept of 'Ezi Ndu' and communal harmony?", options: ["Living a good, upright life and maintaining peaceful communal relationships", "Accumulating private wealth only", "Moving to foreign countries", "Isolating oneself in forests"], answer: "A" },
+                    { q: "What is the Hausa concept of 'Mutunci'?", options: ["Human dignity, honor, trustworthiness, and respect for others", "Physical strength", "Political authority", "Financial wealth"], answer: "A" },
+                    { q: "How does Nigerian cuisine reflect its cultural diversity?", options: ["Everyone eats the exact same meal", "Rich variety of staple dishes (such as Jollof rice, pounded yam, tuwo, egusi) influenced by local geography and agriculture", "Food is imported entirely from abroad", "Eating raw foods"], answer: "B" },
+                    { q: "What role do Nigerian music and Nollywood movies play globally?", options: ["They promote cultural diplomacy, entertainment export, and projection of African identity", "They have no international audience", "They are restricted locally", "They focus only on foreign history"], answer: "A" },
+                    { q: "What is the significance of inter-ethnic marriage in Nigeria?", options: ["It fosters national integration, unity, and bridge-building across cultural divides", "It is legally prohibited", "It destroys traditions", "It has no effect"], answer: "A" },
+                    { q: "What is the challenge of sectionalism and tribalism in Nigeria?", options: ["It strengthens national unity instantly", "It undermines national cohesion, meritocracy, and equitable development", "It improves economic growth", "It eliminates corruption"], answer: "B" },
+                    { q: "What is the significance of the Nigerian National Pledge and Anthem?", options: ["Expressions of patriotism, loyalty, and commitment to national service and peace", "Party political songs", "School detention punishments", "Military marching orders"], answer: "A" },
+                    { q: "What was the primary objective of the 1914 amalgamation?", options: ["To make Northern administrative budget self-sufficient using Southern surplus custom revenues", "To create a democratic republic", "To build international airports", "To establish a national university"], answer: "A" },
+                    { q: "What is cultural imperialism?", options: ["Equally sharing cultural values", "The domination of one culture over others, often through media, economic power, and globalization", "Protecting local artifacts", "Studying ancient history"], answer: "B" },
+                    { q: "How can Nigeria harness its cultural diversity as an asset rather than a liability?", options: ["Through inclusive governance, mutual respect, dialogue, and celebration of shared values", "By forcing everyone to adopt one culture", "By banning ethnic associations", "By isolating regions"], answer: "A" },
+                    { q: "What is civic responsibility in nation-building?", options: ["Paying taxes, obeying laws, voting, and contributing positively to community welfare", "Waiting for government handouts", "Criticizing leaders on social media only", "Avoiding public service"], answer: "A" },
+                    { q: "What is the significance of the Niger Delta region in Nigeria's economy?", options: ["Major producer of agricultural cocoa", "Heartland of crude oil and natural gas production funding the national economy", "Main diamond mining zone", "Primary textile manufacturing hub"], answer: "B" },
+                    { q: "What is the significance of traditional attire across Nigerian ethnic groups?", options: ["It reflects artistic expression, social status, and distinct ethnic identity (e.g., Agbada, Ankara, Isedo, Buba)", "Everyone wears identical uniforms", "Clothing is purely westernized", "Traditional clothes are forbidden"], answer: "A" },
+                    { q: "What is the role of youth in preserving Nigerian cultural heritage?", options: ["Rejecting all traditions", "Serving as dynamic custodians, innovators, and promoters of positive cultural values", "Moving abroad permanently", "Ignoring history"], answer: "B" },
+                    { q: "What is the importance of studying Nigerian Peoples and Culture in tertiary education?", options: ["To foster national consciousness, mutual understanding, and appreciation of Nigeria's rich heritage", "To memorize dates for examinations", "To fulfill graduation requirements only", "To learn foreign languages"], answer: "A" },
+                    { q: "What is cultural diffusion?", options: ["The spreading out of culture, culture traits, or religious practices from a central point to other regions", "The destruction of old buildings", "The isolation of ethnic groups", "The translation of books"], answer: "A" },
+                    { q: "What is cultural assimilation?", options: ["When members of a minority group adopt the beliefs and customs of the dominant culture", "Maintaining distinct cultural traditions", "Refusing to speak national languages", "Trading goods across borders"], answer: "A" },
+                    { q: "What is the significance of age-grade systems in traditional Nigerian societies (e.g., among the Igbo and Yoruba)?", options: ["Mobilizing community labor, maintaining law and order, and fostering communal development", "Organizing children's birthday parties", "Collecting parking fines", "Selecting school teachers"], answer: "A" },
+                    { q: "How has globalization affected Nigerian culture?", options: ["It has brought western media and lifestyle influences while sparking a powerful renaissance in local music, fashion, and film", "It has had zero impact", "It completely wiped out local traditions", "It stopped internet usage"], answer: "A" },
+                    { q: "What is the core message of Nigeria's motto: 'Unity and Faith, Peace and Progress'?", options: ["Commitment to national solidarity, religious tolerance, and collective advancement", "Military dominance over civilians", "Economic isolation from neighbors", "Political division of states"], answer: "A" }
+                ]
+            },
+            "MTH 102": {
+                code: "MTH 102",
+                title: "MTH 102 - Elementary Mathematics II",
+                school: "School of Computing",
+                questions: [
+                    { q: "What is the derivative of x^n with respect to x (Power Rule)?", options: ["n * x^(n-1)", "x^(n+1) / (n+1)", "n * x^n", "x^n / n"], answer: "A" },
+                    { q: "What is the integral of x^n with respect to x (for n != -1)?", options: ["n * x^(n-1)", "(x^(n+1)) / (n + 1) + C", "x^n * ln(x)", "nx"], answer: "B" },
+                    { q: "What does definite integration compute geometrically?", options: ["The slope of a tangent line", "The net area under a curve between two limits", "The roots of a polynomial equation", "The radius of curvature"], answer: "B" },
+                    { q: "What is the derivative of sin(x) with respect to x?", options: ["-cos(x)", "cos(x)", "-sin(x)", "tan(x)"], answer: "B" },
+                    { q: "What is the derivative of cos(x)?", options: ["sin(x)", "-sin(x)", "cos(x)", "-cos(x)"], answer: "B" },
+                    { q: "What is the derivative of e^x?", options: ["x * e^(x-1)", "e^x", "ln(x)", "1 / x"], answer: "B" },
+                    { q: "What is the derivative of ln(x)?", options: ["1 / x", "e^x", "x", "1 / e^x"], answer: "A" },
+                    { q: "What is the chain rule used for in differentiation?", options: ["Differentiating composite functions", "Adding matrices", "Solving quadratic equations", "Integrating polynomials"], answer: "A" },
+                    { q: "What is integration by parts formula?", options: ["Integral of (u * dv) = u*v - Integral of (v * du)", "Integral of (u * v) = u' * v'", "Integral of (u / v) = u*v", "Integral = u + v"], answer: "A" },
+                    { q: "What is a matrix?", options: ["A single number", "A rectangular array or table of numbers arranged in rows and columns", "A geometric circle", "A prime number sequence"], answer: "B" },
+                    { q: "What is the determinant of a 2x2 matrix [[a, b], [c, d]]?", options: ["a*d - b*c", "a*b + c*d", "a*c - b*d", "a*d + b*c"], answer: "A" },
+                    { q: "When is a square matrix invertible (non-singular)?", options: ["When its determinant is equal to zero", "When its determinant is NOT equal to zero", "When all entries are positive", "When it is a diagonal matrix"], answer: "B" },
+                    { q: "What is the transpose of a matrix?", options: ["Multiplying all elements by -1", "Interchanging its rows and columns", "Inverting its determinant", "Squaring every element"], answer: "B" },
+                    { q: "What is a vector in mathematics and physics?", options: ["A quantity having magnitude only", "A quantity having both magnitude and direction", "A scalar number", "A matrix determinant"], answer: "B" },
+                    { q: "How is the dot product (scalar product) of two vectors A and B calculated?", options: ["|A| * |B| * cos(theta)", "|A| * |B| * sin(theta)", "A / B", "Vector cross product"], answer: "A" },
+                    { q: "How is the cross product (vector product) magnitude of two vectors A and B calculated?", options: ["|A| * |B| * cos(theta)", "|A| * |B| * sin(theta)", "Zero", "|A| + |B|"], answer: "B" },
+                    { q: "What does the cross product of two parallel vectors equal?", options: ["1", "Zero vector", "-1", "Infinity"], answer: "B" },
+                    { q: "What is a complex number?", options: ["A number that cannot be written", "A number of the form a + bi where a and b are real numbers and i² = -1", "A very large integer", "A prime number"], answer: "B" },
+                    { q: "What is the imaginary unit i defined as?", options: ["sqrt(1)", "sqrt(-1)", "1 / 0", "pi"], answer: "B" },
+                    { q: "What is the complex conjugate of a + bi?", options: ["a + bi", "a - bi", "-a - bi", "-a + bi"], answer: "B" },
+                    { q: "What is De Moivre's Theorem for complex numbers?", options: ["(cos(theta) + i*sin(theta))^n = cos(n*theta) + i*sin(n*theta)", "(a + bi)^n = a^n + b^n", "e^(ix) = 1", "i^n = 1"], answer: "A" },
+                    { q: "What is a limit in calculus?", options: ["The maximum value a function can reach", "The value that a function approaches as the input approaches some value", "The derivative slope", "The integral area"], answer: "B" },
+                    { q: "What is L'Hopital's Rule used for?", options: ["Evaluating indeterminate limits of the form 0/0 or infinity/infinity using derivatives", "Finding matrix inverses", "Solving differential equations", "Calculating vector angles"], answer: "A" },
+                    { q: "What is a differential equation?", options: ["An equation containing derivatives of a function", "An algebraic equation with no variables", "A matrix multiplication", "A quadratic formula"], answer: "A" },
+                    { q: "What is separation of variables in differential equations?", options: ["Moving all terms of x to one side and all terms of y to the other side to integrate both sides", "Dividing by zero", "Solving matrices", "Factoring polynomials"], answer: "A" },
+                    { q: "What is the Taylor series expansion of a function about x = 0 (Maclaurin series)?", options: ["Sum from n=0 to infinity of (f^(n)(0) / n!) * x^n", "Sum of x^n", "Derivative times x", "Integral of x"], answer: "A" },
+                    { q: "What is a sequence in mathematics?", options: ["An unordered set of numbers", "An ordered list of numbers usually indexed by integers", "A matrix of numbers", "A geometric curve"], answer: "B" },
+                    { q: "What is an arithmetic progression (AP)?", options: ["A sequence where each term after the first is obtained by adding a constant difference (d)", "A sequence with multiplying ratio", "Random numbers", "Prime numbers"], answer: "A" },
+                    { q: "What is a geometric progression (GP)?", options: ["A sequence where each term after the first is found by multiplying the previous term by a constant ratio (r)", "Adding a constant", "Subtracting numbers", "Square numbers"], answer: "A" },
+                    { q: "What is the sum to infinity of a convergent geometric series with first term a and common ratio |r| < 1?", options: ["a / (1 - r)", "a * r", "a / r", "Infinity"], answer: "A" },
+                    { q: "What is a binomial expansion coefficient given by (n choose k)?", options: ["n! / (k! * (n - k)!)", "n * k", "n! / k!", "n - k"], answer: "A" },
+                    { q: "What is the middle term of a binomial expansion of (a + b)^n when n is even?", options: ["Term (n/2 + 1)", "Term n", "Term 1", "Term (n+1)"], answer: "A" },
+                    { q: "What is the slope of a line perpendicular to a line with slope m?", options: ["m", "-1 / m", "1 / m", "-m"], answer: "B" },
+                    { q: "What is the equation of a circle with center (h, k) and radius r?", options: ["(x - h)² + (y - k)² = r²", "x² + y² = r", "y = mx + c", "(x/a)² + (y/b)² = 1"], answer: "A" },
+                    { q: "What is the eccentricity of a circle?", options: ["0", "1", "Greater than 1", "Infinity"], answer: "A" },
+                    { q: "What conic section has eccentricity equal to 1?", options: ["Ellipse", "Hyperbola", "Parabola", "Circle"], answer: "C" },
+                    { q: "What is the general equation of a parabola opening upwards with vertex at origin?", options: ["y = 4ax²", "x² = 4ay", "x² + y² = r²", "y = mx + c"], answer: "B" },
+                    { q: "What is the eccentricity e of an ellipse?", options: ["e = 0", "0 < e < 1", "e = 1", "e > 1"], answer: "B" },
+                    { q: "What is the eccentricity e of a hyperbola?", options: ["e = 1", "e < 1", "e > 1", "e = 0"], answer: "C" },
+                    { q: "What is partial differentiation?", options: ["Differentiating a function of multiple variables with respect to one variable while holding the others constant", "Differentiating half of an equation", "Integrating partially", "Finding matrix determinants"], answer: "A" },
+                    { q: "What is the gradient vector of a scalar function f(x, y, z)?", options: ["Vector of its partial derivatives [df/dx, df/dy, df/dz]", "Scalar sum", "Matrix product", "Zero vector"], answer: "A" },
+                    { q: "What is multiple integration used for?", options: ["Calculating areas, volumes, and mass of multidimensional regions", "Solving arithmetic", "Counting integers", "Drawing graphs"], answer: "A" },
+                    { q: "What is the Jacobian determinant used for in multivariable calculus?", options: ["Coordinate transformations in multiple integrals", "Solving linear equations", "Matrix inversion", "Finding eigenvalues"], answer: "A" },
+                    { q: "What is an eigenvalue of a square matrix A?", options: ["A scalar lambda such that A*v = lambda*v for some non-zero vector v", "The determinant", "The trace sum", "Zero"], answer: "A" },
+                    { q: "What is the trace of a square matrix?", options: ["Sum of the elements on its main diagonal", "Product of all elements", "Determinant", "Sum of all rows"], answer: "A" },
+                    { q: "What is Cramer's Rule used for?", options: ["Solving systems of linear equations using determinants", "Integrating functions", "Calculating limits", "Factoring quadratics"], answer: "A" },
+                    { q: "What is a homogeneous linear differential equation?", options: ["An equation where all terms involving the dependent variable and its derivatives equal zero on one side", "An equation with non-zero constant terms", "Algebraic polynomials", "Matrix equations"], answer: "A" },
+                    { q: "What is the integrating factor used for in first-order linear differential equations (dy/dx + P(x)y = Q(x))?", options: ["e^(Integral of P(x) dx)", "P(x) * Q(x)", "ln(P(x))", "1 / Q(x)"], answer: "A" },
+                    { q: "What is polar coordinate representation (r, theta) of a Cartesian point (x, y)?", options: ["r = sqrt(x² + y²), tan(theta) = y / x", "r = x + y", "r = x * y", "theta = x - y"], answer: "A" },
+                    { q: "How do you convert polar coordinates (r, theta) to Cartesian coordinates (x, y)?", options: ["x = r*cos(theta), y = r*sin(theta)", "x = r*sin(theta), y = r*cos(theta)", "x = r + theta", "x = r / theta"], answer: "A" },
+                    { q: "What is the area of a sector of a circle with radius r and angle theta in radians?", options: ["1/2 * r² * theta", "r * theta", "pi * r²", "2 * pi * r"], answer: "A" },
+                    { q: "What is trigonometric identity for sin²(theta) + cos²(theta)?", options: ["1", "0", "2", "sin(2*theta)"], answer: "A" },
+                    { q: "What is the derivative of tan(x)?", options: ["sec²(x)", "csc²(x)", "-sec(x)", "cot(x)"], answer: "A" },
+                    { q: "What is the integral of 1 / x with respect to x?", options: ["ln|x| + C", "e^x + C", "-1 / x² + C", "x² / 2 + C"], answer: "A" },
+                    { q: "What is integration by substitution (u-substitution) based on?", options: ["The chain rule in reverse", "The product rule", "Matrix inversion", "Integration by parts"], answer: "A" },
+                    { q: "What is the centroid of a geometric region?", options: ["The geometric center or average position of all points in the shape", "The highest vertex", "The outer perimeter", "The focal point"], answer: "A" },
+                    { q: "What is Gauss's Divergence Theorem in vector calculus?", options: ["Relates a volume integral of divergence to a surface flux integral", "Relates line integrals to surface integrals", "Solves quadratic equations", "Calculates matrix rank"], answer: "A" },
+                    { q: "What is Stokes' Theorem?", options: ["Relates a surface integral of curl to a line integral around the boundary curve", "Calculates limits", "Solves differential equations", "Finds roots of polynomials"], answer: "A" },
+                    { q: "What is the fundamental theorem of calculus?", options: ["Links the concept of differentiating a function with the concept of integrating it", "States that 1+1=2", "Proves prime numbers are infinite", "Defines matrix multiplication"], answer: "A" },
+                    { q: "Why is elementary mathematics II essential for computing and science students?", options: ["It provides the foundational analytical, calculus, and linear algebra tools required for algorithms, graphics, and machine learning", "It is only for memorization", "It replaces programming", "It is required for history essays"], answer: "A" }
+                ]
+            }
+        };
+
+        // Application State
+        let activeView = 'dashboard'; // 'dashboard', 'exam', 'result'
+        let currentCourseCode = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = {}; // { questionIndex: 'A'/'B'/'C'/'D' }
+        let flaggedQuestions = {}; // { questionIndex: true/false }
+        let timerInterval = null;
+        let timeLeft = 3600; // 60 minutes in seconds
+        let examResultsHistory = {}; // { courseCode: { score, total, percentage, timeSpent, answers } }
+
+        // Render Dashboard
+        function showDashboard() {
+            activeView = 'dashboard';
+            clearInterval(timerInterval);
+            document.getElementById('nav-title').innerText = "My courses";
+            
+            const container = document.getElementById('main-container');
+            
+            let html = `
+                <div class="mb-8">
+                    <h1 class="text-2xl font-bold text-gray-900">Dashboard / My Courses</h1>
+                    <p class="text-gray-600 text-sm mt-1">Select a course to start your 60-minute CBT examination (60 objective questions per course).</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            `;
+
+            const coursesList = Object.values(examData);
+            
+            coursesList.forEach(course => {
+                const isCompleted = examResultsHistory[course.code] !== undefined;
+                const scoreData = examResultsHistory[course.code];
+                const progressPct = isCompleted ? 100 : 2;
+
+                html += `
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                        <div>
+                            <div class="relative h-40 bg-gradient-to-r from-blue-900 to-indigo-900 p-4 flex flex-col justify-between text-white">
+                                <div class="absolute top-0 right-4 miva-red text-white text-xs font-bold px-3 py-2 badge-100l shadow">
+                                    100L
+                                </div>
+                                <span class="text-xs bg-black/30 backdrop-blur px-2.5 py-1 rounded-full w-max">${course.school}</span>
+                                <h3 class="font-bold text-lg leading-snug">${course.title}</h3>
+                            </div>
+                            <div class="p-5">
+                                <div class="flex justify-between text-xs text-gray-500 mb-1">
+                                    <span>Course Progress</span>
+                                    <span>${progressPct}% Completed</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-500 h-full rounded-full" style="width: ${progressPct}%"></div>
+                                </div>
+                                ${isCompleted ? `
+                                    <div class="mt-4 p-2 bg-emerald-50 border border-emerald-200 rounded text-xs text-emerald-800 flex justify-between items-center">
+                                        <span>Last Score: <b>${scoreData.score}/${scoreData.total} (${scoreData.percentage}%)</b></span>
+                                        <span class="font-semibold uppercase">${scoreData.percentage >= 50 ? 'Passed' : 'Review'}</span>
+                                    </div>
+                                ` : `
+                                    <div class="mt-4 text-xs text-gray-500 flex items-center space-x-1">
+                                        <i class="fa-regular fa-clock text-blue-600"></i>
+                                        <span>60 Questions &bull; 60 Minutes</span>
+                                    </div>
+                                `}
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <button onclick="startExam('${course.code}')" class="w-full bg-[#0b2240] hover:bg-blue-950 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-laptop-code"></i>
+                                <span>${isCompleted ? 'Retake CBT Exam' : 'Start CBT Exam'}</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        // Start Exam Function
+        function startExam(code) {
+            currentCourseCode = code;
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            flaggedQuestions = {};
+            timeLeft = 3600; // 60 mins
+            activeView = 'exam';
+            
+            document.getElementById('nav-title').innerText = examData[code].title;
+            
+            renderExamInterface();
+            startTimer();
+        }
+
+        // Start Countdown Timer
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    alert("Time is up! Your exam will be submitted automatically.");
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            const timerEl = document.getElementById('cbt-timer');
+            if (timerEl) {
+                timerEl.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                if (timeLeft < 300) { // under 5 mins
+                    timerEl.classList.add('text-red-600', 'animate-pulse');
+                }
+            }
+        }
+
+        // Render Exam UI (Miva LMS Style)
+        function renderExamInterface() {
+            const course = examData[currentCourseCode];
+            const q = course.questions[currentQuestionIndex];
+            const totalQ = course.questions.length;
+
+            const container = document.getElementById('main-container');
+
+            let html = `
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-xl border border-gray-200 shadow-sm gap-4">
+                    <div>
+                        <button onclick="showDashboard()" class="text-xs text-blue-600 hover:underline flex items-center space-x-1 mb-1">
+                            <i class="fa-solid fa-arrow-left"></i><span>Back to My Courses</span>
+                        </button>
+                        <h2 class="text-lg font-bold text-gray-900">${course.title}</h2>
+                    </div>
+                    <div class="flex items-center space-x-4 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
+                        <div class="flex items-center space-x-2 text-gray-700">
+                            <i class="fa-regular fa-clock text-red-600 text-lg"></i>
+                            <span class="text-xs uppercase font-semibold text-gray-500">Time Remaining:</span>
+                            <span id="cbt-timer" class="font-mono font-bold text-lg text-gray-900">60:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    <!-- QUESTION MAIN PANEL -->
+                    <div class="lg:col-span-3 space-y-6">
+                        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+                            <!-- Question meta header -->
+                            <div class="flex justify-between items-center border-b border-gray-100 pb-4 mb-6">
+                                <div class="text-sm font-semibold text-gray-700">
+                                    Question <span class="text-blue-600">${currentQuestionIndex + 1}</span> of ${totalQ}
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-xs text-gray-500">Marked out of 1.00</span>
+                                    <button onclick="toggleFlag(${currentQuestionIndex})" class="text-xs px-3 py-1.5 rounded border transition flex items-center space-x-1.5 ${flaggedQuestions[currentQuestionIndex] ? 'bg-amber-50 border-amber-300 text-amber-700' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'}">
+                                        <i class="fa-solid fa-flag"></i>
+                                        <span>${flaggedQuestions[currentQuestionIndex] ? 'Flagged' : 'Flag question'}</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Question text -->
+                            <div class="text-gray-900 font-medium text-lg mb-6 leading-relaxed">
+                                ${q.q}
+                            </div>
+
+                            <!-- Options -->
+                            <div class="space-y-3 mb-8">
+                                <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Select one:</div>
+                            `;
+
+                            const optionLabels = ['A', 'B', 'C', 'D'];
+                            q.options.forEach((optText, optIdx) => {
+                                const optLetter = optionLabels[optIdx];
+                                const isSelected = userAnswers[currentQuestionIndex] === optLetter;
+                                html += `
+                                    <label class="flex items-start space-x-3 p-3.5 rounded-lg border cursor-pointer transition ${isSelected ? 'border-blue-600 bg-blue-50/50' : 'border-gray-200 hover:bg-gray-50'}" onclick="selectOption('${optLetter}')">
+                                        <input type="radio" name="q_option" class="mt-1 text-blue-600 focus:ring-blue-500" ${isSelected ? 'checked' : ''}>
+                                        <div class="text-sm text-gray-800"><span class="font-semibold mr-2">${optLetter.toLowerCase()}.</span>${optText}</div>
+                                    </label>
+                                `;
+                            });
+
+                            html += `
+                            </div>
+
+                            <!-- Navigation buttons -->
+                            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                                <button onclick="prevQuestion()" ${currentQuestionIndex === 0 ? 'disabled' : ''} class="px-5 py-2.5 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition">
+                                    <i class="fa-solid fa-arrow-left mr-2"></i> Previous
+                                </button>
+                                <div class="flex space-x-3">
+                                    ${currentQuestionIndex === totalQ - 1 ? `
+                                        <button onclick="confirmSubmit()" class="px-6 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow transition">
+                                            Finish Attempt...
+                                        </button>
+                                    ` : `
+                                        <button onclick="nextQuestion()" class="px-6 py-2.5 rounded-lg bg-[#0b2240] hover:bg-blue-950 text-white text-sm font-semibold shadow transition">
+                                            Next <i class="fa-solid fa-arrow-right ml-2"></i>
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUIZ NAVIGATION SIDEBAR (Miva Style) -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 sticky top-20">
+                            <h3 class="font-bold text-gray-900 mb-3 text-base border-b border-gray-100 pb-2">Quiz navigation</h3>
+                            
+                            <div class="grid grid-cols-5 gap-2 my-4 max-h-[380px] overflow-y-auto p-1">
+            `;
+
+            for (let i = 0; i < totalQ; i++) {
+                let statusClass = "bg-white border-gray-300 text-gray-700 hover:bg-gray-100";
+                if (userAnswers[i] !== undefined) {
+                    statusClass = "bg-blue-600 border-blue-600 text-white font-semibold";
+                }
+                if (flaggedQuestions[i]) {
+                    statusClass += " ring-2 ring-amber-400";
+                }
+                if (i === currentQuestionIndex) {
+                    statusClass += " ring-2 ring-offset-2 ring-blue-900";
+                }
+
+                html += `
+                    <button onclick="jumpToQuestion(${i})" class="w-10 h-10 rounded border text-xs flex items-center justify-center transition ${statusClass}">
+                        ${i + 1}
+                    </button>
+                `;
+            }
+
+            html += `
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-gray-100">
+                                <button onclick="confirmSubmit()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg shadow transition">
+                                    Finish attempt...
+                                </button>
+                            </div>
+
+                            <div class="mt-4 space-y-2 text-xs text-gray-500">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-blue-600 rounded"></div>
+                                    <span>Answered question</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-white border border-gray-300 rounded"></div>
+                                    <span>Not yet answered</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-amber-400 rounded"></div>
+                                    <span>Flagged for review</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            updateTimerDisplay();
+        }
+
+        function selectOption(letter) {
+            userAnswers[currentQuestionIndex] = letter;
+            renderExamInterface();
+        }
+
+        function toggleFlag(index) {
+            flaggedQuestions[index] = !flaggedQuestions[index];
+            renderExamInterface();
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < examData[currentCourseCode].questions.length - 1) {
+                currentQuestionIndex++;
+                renderExamInterface();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderExamInterface();
+            }
+        }
+
+        function jumpToQuestion(index) {
+            currentQuestionIndex = index;
+            renderExamInterface();
+        }
+
+        function confirmSubmit() {
+            const totalQ = examData[currentCourseCode].questions.length;
+            const answeredCount = Object.keys(userAnswers).length;
+            const unanswered = totalQ - answeredCount;
+
+            let msg = `Are you sure you want to submit your exam?\n\nAnswered: ${answeredCount} / ${totalQ}`;
+            if (unanswered > 0) {
+                msg += `\nWarning: You have ${unanswered} unanswered question(s)!`;
+            }
+
+            if (confirm(msg)) {
+                submitExam();
+            }
+        }
+
+        // Submit and Calculate Score
+        function submitExam() {
+            clearInterval(timerInterval);
+            const course = examData[currentCourseCode];
+            let score = 0;
+            const total = course.questions.length;
+
+            course.questions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    score++;
+                }
+            });
+
+            const percentage = Math.round((score / total) * 100);
+            const timeSpentSecs = 3600 - timeLeft;
+            const minutesSpent = Math.floor(timeSpentSecs / 60);
+            const secondsSpent = timeSpentSecs % 60;
+
+            examResultsHistory[currentCourseCode] = {
+                score,
+                total,
+                percentage,
+                timeSpent: `${minutesSpent}m ${secondsSpent}s`,
+                answers: { ...userAnswers }
+            };
+
+            renderResultView(score, total, percentage, `${minutesSpent}m ${secondsSpent}s`);
+        }
+
+        // Render Result View
+        function renderResultView(score, total, percentage, timeSpent) {
+            activeView = 'result';
+            const course = examData[currentCourseCode];
+            const container = document.getElementById('main-container');
+
+            let gradeColor = "text-emerald-600 bg-emerald-50 border-emerald-200";
+            let gradeText = "Excellent Performance!";
+            if (percentage < 50) {
+                gradeColor = "text-red-600 bg-red-50 border-red-200";
+                gradeText = "Needs Improvement";
+            } else if (percentage < 70) {
+                gradeColor = "text-amber-600 bg-amber-50 border-amber-200";
+                gradeText = "Good Effort!";
+            }
+
+            let html = `
+                <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden my-6">
+                    <div class="miva-nav text-white p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                        <div>
+                            <span class="text-xs bg-white/20 px-3 py-1 rounded-full uppercase tracking-wider">${course.code} Examination</span>
+                            <h1 class="text-2xl font-bold mt-2">${course.title}</h1>
+                            <p class="text-gray-300 text-sm mt-1">Completed Assessment Summary & Score Report</p>
+                        </div>
+                        <div class="mt-4 sm:mt-0 bg-white/10 px-5 py-3 rounded-xl backdrop-blur text-right">
+                            <div class="text-xs text-gray-300">Time Spent</div>
+                            <div class="font-mono text-lg font-bold">${timeSpent}</div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+                                <div class="text-xs text-gray-500 uppercase font-semibold">Final Score</div>
+                                <div class="text-4xl font-extrabold text-gray-900 mt-2">${score} <span class="text-xl text-gray-400">/ ${total}</span></div>
+                            </div>
+                            <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+                                <div class="text-xs text-gray-500 uppercase font-semibold">Percentage</div>
+                                <div class="text-4xl font-extrabold text-blue-600 mt-2">${percentage}%</div>
+                            </div>
+                            <div class="border rounded-xl p-6 text-center ${gradeColor}">
+                                <div class="text-xs uppercase font-semibold">Status</div>
+                                <div class="text-lg font-bold mt-2">${gradeText}</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 justify-between items-center pt-6 border-t border-gray-200">
+                            <button onclick="showDashboard()" class="w-full sm:w-auto px-6 py-3 rounded-lg bg-[#0b2240] hover:bg-blue-950 text-white font-semibold text-sm transition flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-house"></i>
+                                <span>Return to Dashboard</span>
+                            </button>
+                            <button onclick="startExam('${course.code}')" class="w-full sm:w-auto px-6 py-3 rounded-lg border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold text-sm transition flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-rotate-right"></i>
+                                <span>Retake Exam</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DETAILED REVIEW SECTION -->
+                <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-3">Detailed Question Review</h3>
+                    <div class="space-y-6">
+            `;
+
+            const optionLabels = ['A', 'B', 'C', 'D'];
+            course.questions.forEach((q, idx) => {
+                const userAns = examResultsHistory[currentCourseCode].answers[idx] || "Not Answered";
+                const isCorrect = userAns === q.answer;
+
+                html += `
+                    <div class="border rounded-xl p-5 ${isCorrect ? 'border-emerald-200 bg-emerald-50/30' : 'border-red-200 bg-red-50/30'}">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="font-bold text-sm text-gray-700">Question ${idx + 1}</span>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">
+                                ${isCorrect ? 'Correct' : 'Incorrect / Unanswered'}
+                            </span>
+                        </div>
+                        <div class="text-gray-900 font-medium mb-4">${q.q}</div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                `;
+
+                q.options.forEach((optText, optIdx) => {
+                    const optLetter = optionLabels[optIdx];
+                    let optStyle = "bg-white border-gray-200 text-gray-700";
+                    if (optLetter === q.answer) {
+                        optStyle = "bg-emerald-100 border-emerald-300 text-emerald-900 font-semibold";
+                    } else if (optLetter === userAns && !isCorrect) {
+                        optStyle = "bg-red-100 border-red-300 text-red-900 font-semibold";
+                    }
+
+                    html += `
+                        <div class="p-3 rounded-lg border text-xs flex items-center space-x-2 ${optStyle}">
+                            <span class="font-bold">${optLetter}.</span>
+                            <span>${optText}</span>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                        <div class="text-xs text-gray-600 mt-2">
+                            Your answer: <b class="${isCorrect ? 'text-emerald-700' : 'text-red-700'}">${userAns}</b> &bull; Correct Answer: <b class="text-emerald-700">${q.answer}</b>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Initialize App on load
+        window.onload = function() {
+            showDashboard();
+        };
+    </script>
+</body>
+</html>
